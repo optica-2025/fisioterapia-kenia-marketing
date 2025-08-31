@@ -74,6 +74,24 @@
             0%, 100% { box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
             50% { box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5); }
         }
+        .anatomy-image {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 15px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -91,7 +109,7 @@
             <!-- Opciones Principales -->
             <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
                 <h2 class="text-xl font-bold mb-6 text-center">¿Qué mensaje quieres crear?</h2>
-               
+              
                 <div class="grid gap-4 mb-6">
                     <button onclick="selectMessageType('info')" id="type-info" class="touch-btn bg-blue-500 text-white p-6 rounded-xl text-left shadow-lg selected">
                         <div class="flex items-center">
@@ -102,7 +120,7 @@
                             </div>
                         </div>
                     </button>
-                   
+                  
                     <button onclick="selectMessageType('offer')" id="type-offer" class="touch-btn bg-purple-500 text-white p-6 rounded-xl text-left shadow-lg">
                         <div class="flex items-center">
                             <i class="fas fa-gift text-2xl mr-4"></i>
@@ -198,10 +216,16 @@
                 <!-- Mensaje de Texto -->
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
                     <h3 class="text-xl font-bold mb-4 text-center">📱 Mensaje de Texto</h3>
-                   
+                  
                     <div class="simple-card">
                         <div id="messageContent" class="text-sm leading-relaxed whitespace-pre-line"></div>
                        
+                        <!-- Imagen de anatomía relacionada -->
+                        <div id="anatomyImageContainer" class="mt-4 text-center hidden">
+                            <img id="anatomyImage" class="anatomy-image mx-auto" alt="Anatomía relacionada">
+                            <p class="text-xs text-gray-500 mt-1">Imagen de referencia anatómica</p>
+                        </div>
+                      
                         <!-- Botones de Contacto (Vista Previa) -->
                         <div class="mt-6 pt-4 border-t-2 border-gray-100">
                             <p class="text-center text-sm text-gray-600 mb-4">👆 Tus clientes verán estos botones:</p>
@@ -218,7 +242,7 @@
                             </div>
                         </div>
                     </div>
-                   
+                  
                     <!-- Acciones -->
                     <div class="grid gap-3 mt-6">
                         <button onclick="copyMessage()" class="touch-btn bg-green-600 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg">
@@ -240,6 +264,18 @@
         let messageType = 'info';
         let selectedProblem = 'espalda';
         let currentMessage = '';
+
+        // Base de datos de imágenes de anatomía
+        const anatomyImages = {
+            espalda: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+            cuello: 'https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+            rodilla: 'https://images.unsplash.com/photo-1504439468489-c8920d796a29?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+            hombro: 'https://images.unsplash.com/photo-1519817914152-22d216bb9170?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+            pies: 'https://images.unsplash.com/photo-1543946200-2c3f2aba2e5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+            geriatrica: 'https://images.unsplash.com/photo-1535448580089-c7f9490c78b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+            deportiva: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+            general: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+        };
 
         // Base de datos de contenido con múltiples variaciones
         const contentDatabase = {
@@ -361,191 +397,178 @@
         const messageTemplates = {
             info: [
                 '🌟 ¿Tienes {problem}?\n\nComo fisioterapeuta profesional te puedo ayudar con:\n• {treatments}\n• Servicio a domicilio\n• Atención personalizada\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n¡No dejes que el dolor limite tu vida!',
-               
+              
                 '💪 ¿Sufres de {problem}?\n\nTengo la solución profesional que necesitas:\n• {treatments}\n• Evaluación completa incluida\n• Horarios flexibles disponibles\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n¡Recupera tu bienestar hoy mismo!',
-               
+              
                 '🏥 Tratamiento especializado para {problem}\n\nOfrecer soluciones efectivas:\n• {treatments}\n• Técnicas modernas comprobadas\n• Atención personalizada\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n¡Tu salud no puede esperar!'
             ],
             offer: [
                 '🎉 OFERTA ESPECIAL 🎉\n\n¿Sufres de {problem}?\n\n💰 ESTA SEMANA:\n✅ Primera consulta 50% descuento\n✅ Servicio a domicilio GRATIS\n✅ Evaluación completa incluida\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n⏰ Oferta por tiempo limitado',
-               
+              
                 '💸 PROMOCIÓN LIMITADA 💸\n\nTratamiento para {problem}\n\n🎁 INCLUYE:\n• 3 sesiones por el precio de 2\n• Evaluación profesional gratis\n• Plan de ejercicios personalizado\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n🔥 Solo por esta semana',
-               
-                '⭐ DESCUENTO ESPECIAL ⭐\n\n¿Necesitas tratamiento para {problem}?\n\n💎 OFERTA EXCLUSIVA:\n• Consulta de evaluación GRATIS\n• 25% descuento en tratamientos\n• Servicio domiciliario sin costo\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n⏰ Cupos limitados'
+              
+                '🚀 OFERTA EXCLUSIVA 🚀\n\nPara pacientes con {problem}\n\n✨ BENEFICIOS:\n• Primera sesión gratis\n• Descuento en paquetes\n• Asesoría gratuita por WhatsApp\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n🎯 Aprovecha ahora'
             ],
             card: [
-                '💳 TARJETA DE PRESENTACIÓN\n\n🏥 LIC. KENIA DE LOS SANTOS ANDUJAR\n👩‍⚕️ FISIOTERAPEUTA PROFESIONAL\n\n🎯 ESPECIALIDADES:\n• Masoterapia terapéutica\n• TENS (electroestimulación)\n• Terapias de calor y frío\n• Rehabilitación profesional\n• Servicio a domicilio\n\n📱 WhatsApp: +1 (829) 697-4658\n⚡ Emergencias 24/7 disponibles\n⏰ Horarios flexibles\n\n💚 ¡Comparte esta tarjeta con quien necesite ayuda!'
+                '👋 ¡Hola! Te comparto mi información de contacto:\n\n👩‍⚕️ Lic. Kenia de los Santos Andujar\n🏥 Fisioterapeuta Profesional\n💪 Especialista en {problem}\n\n📱 WhatsApp: +1 (829) 697-4658\n📍 Servicio a domicilio disponible\n\n⭐ Atención personalizada y de calidad',
+              
+                '📇 Tarjeta de Presentación\n\n👩‍⚕️ Lic. Kenia de los Santos Andujar\n🏥 Fisioterapeuta Especializada\n\n💪 Especialista en tratar {problem}\n📱 WhatsApp: +1 (829) 697-4658\n📍 Consultas a domicilio\n\n🌟 Comparte con quien necesite ayuda',
+              
+                '🩺 Fisioterapia Profesional\n\n👩‍⚕️ Lic. Kenia de los Santos Andujar\n💪 Especialista en {problem}\n\n📱 Agenda tu cita: +1 (829) 697-4658\n📍 Servicio a domicilio\n\n✨ Resultados garantizados\n⭐ Comparte esta información'
             ],
             testimonial: [
-                '⭐ TESTIMONIO REAL ⭐\n\n"Llegué con {problem} severo y no podía realizar mis actividades diarias. Después del tratamiento profesional con la Lic. Kenia, he recuperado mi calidad de vida por completo."\n\n- Paciente satisfecha, 58 años\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n¡Únete a mis pacientes satisfechos!',
-               
-                '💬 HISTORIA DE ÉXITO 💬\n\nUna paciente de 67 años llegó con {problem} que la limitaba enormemente. Gracias al tratamiento integral y profesional, ahora disfruta de una vida activa sin dolor.\n\n✨ Resultados comprobados en casos reales\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n¡Tu recuperación es posible!'
+                '⭐ HISTORIA DE ÉXITO ⭐\n\n"Después de sufrir de {problem} durante años, la Lic. Kenia me ayudó a recuperar mi movilidad en solo 5 sesiones. ¡Increíble profesional!"\n\n- María R., paciente satisfecha\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658',
+              
+                '✨ TESTIMONIO REAL ✨\n\n"Gracias a la Lic. Kenia por ayudarme con mi {problem}. Su tratamiento personalizado hizo que me recuperara más rápido de lo esperado. ¡100% recomendada!"\n\n- Carlos M., paciente agradecido\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658',
+              
+                '🏆 RESULTADO COMPROBADO 🏆\n\n"Llegué con mucho {problem} y en pocas semanas la Lic. Kenia me devolvió la calidad de vida. Su enfoque profesional y humano hace la diferencia."\n\n- Ana L., paciente recuperada\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658'
             ]
         };
 
         function selectMessageType(type) {
             messageType = type;
-            document.querySelectorAll('[id^="type-"]').forEach(btn => btn.classList.remove('selected'));
+           
+            // Remover selección de todos los botones
+            document.querySelectorAll('[id^="type-"]').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+           
+            // Aplicar selección al botón clickeado
             document.getElementById(`type-${type}`).classList.add('selected');
         }
 
         function selectProblem(problem) {
             selectedProblem = problem;
-            document.querySelectorAll('[id^="prob-"]').forEach(btn => btn.classList.remove('selected'));
-            document.getElementById(`prob-${problem}`).classList.add('selected');
+           
+            // Remover selección de todos los botones
+            document.querySelectorAll('[id^="prob-"]').forEach(btn => {
+                btn.classList.remove('selected');
+                btn.classList.remove('border-blue-500', 'bg-blue-50');
+                btn.classList.add('border-gray-200');
+            });
+           
+            // Aplicar selección al botón clickeado
+            const selectedBtn = document.getElementById(`prob-${problem}`);
+            selectedBtn.classList.add('selected', 'border-blue-500', 'bg-blue-50');
+            selectedBtn.classList.remove('border-gray-200');
         }
 
         function generateMessage() {
             const problemData = contentDatabase[selectedProblem];
-            const templates = messageTemplates[messageType];
+            const template = messageTemplates[messageType][Math.floor(Math.random() * messageTemplates[messageType].length)];
            
-            // Seleccionar variaciones aleatorias
+            // Seleccionar problemas y tratamientos aleatorios
             const randomProblem = problemData.problems[Math.floor(Math.random() * problemData.problems.length)];
-            const randomTreatments = problemData.treatments.sort(() => 0.5 - Math.random()).slice(0, 3);
-            const randomTemplate = templates[Math.floor(Math.random() * templates.length)];
+            const randomTreatments = [];
            
-            // Generar mensaje
-            let message = randomTemplate
-                .replace('{problem}', randomProblem)
-                .replace('{treatments}', randomTreatments.join('\n• '));
-
-            // Agregar botones de contacto
-            message += '\n\n👇 TOCA EL BOTÓN QUE NECESITES: 👇\n\n';
-            message += '🚨 EMERGENCIA (Dolor muy fuerte):\n';
-            message += `https://wa.me/18296974658?text=🚨%20EMERGENCIA%20-%20Tengo%20dolor%20muy%20fuerte%20y%20necesito%20ayuda%20urgente.%20Mi%20nombre:%20_____%20Mi%20problema:%20_____%20Mi%20dirección:%20_____\n\n`;
-            message += '📅 AGENDAR CITA:\n';
-            message += `https://wa.me/18296974658?text=📅%20Hola%20Doctora%20Kenia,%20quiero%20agendar%20una%20cita.%20Mi%20nombre:%20_____%20Mi%20problema:%20_____%20Día%20que%20me%20conviene:%20_____\n\n`;
-            message += '👥 RECOMENDAR FAMILIAR:\n';
-            message += `https://wa.me/18296974658?text=👥%20Quiero%20recomendar%20a%20un%20familiar.%20Su%20nombre:%20_____%20Su%20teléfono:%20_____%20Su%20problema:%20_____`;
-
-            currentMessage = message;
-            document.getElementById('messageContent').textContent = message;
+            // Seleccionar 3 tratamientos aleatorios
+            for (let i = 0; i < 3; i++) {
+                const randomIndex = Math.floor(Math.random() * problemData.treatments.length);
+                if (!randomTreatments.includes(problemData.treatments[randomIndex])) {
+                    randomTreatments.push(problemData.treatments[randomIndex]);
+                }
+            }
+           
+            // Reemplazar placeholders
+            currentMessage = template
+                .replace(/{problem}/g, randomProblem)
+                .replace(/{treatments}/g, randomTreatments.join('\n• '));
+           
+            // Mostrar mensaje
+            document.getElementById('messageContent').textContent = currentMessage;
+           
+            // Mostrar imagen de anatomía
+            const anatomyContainer = document.getElementById('anatomyImageContainer');
+            const anatomyImage = document.getElementById('anatomyImage');
+           
+            anatomyImage.src = anatomyImages[selectedProblem];
+            anatomyImage.alt = `Anatomía de ${problemData.name}`;
+            anatomyContainer.classList.remove('hidden');
            
             // Generar plantilla visual
-            generateTemplate(problemData, randomProblem, messageType);
+            generateVisualTemplate(messageType, selectedProblem);
            
+            // Mostrar resultados
             document.getElementById('messageResult').classList.remove('hidden');
+           
+            // Scroll a resultados
             document.getElementById('messageResult').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function generateTemplate(problemData, problem, type) {
+        function generateVisualTemplate(type, problem) {
             const canvas = document.getElementById('templateCanvas');
             const ctx = canvas.getContext('2d');
            
+            // Establecer tamaño del canvas
             canvas.width = 800;
             canvas.height = 600;
            
-            // Fondo degradado
+            // Limpiar canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+           
+            // Dibujar fondo
             const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            if (type === 'offer') {
-                gradient.addColorStop(0, '#8b5cf6');
-                gradient.addColorStop(1, '#6366f1');
-            } else if (type === 'card') {
-                gradient.addColorStop(0, '#f59e0b');
-                gradient.addColorStop(1, '#d97706');
-            } else if (type === 'testimonial') {
-                gradient.addColorStop(0, '#10b981');
-                gradient.addColorStop(1, '#059669');
-            } else {
-                gradient.addColorStop(0, '#3b82f6');
-                gradient.addColorStop(1, '#1d4ed8');
-            }
+            gradient.addColorStop(0, '#4f46e5');
+            gradient.addColorStop(1, '#06b6d4');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
            
-            // Área de contenido blanca
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-            ctx.beginPath();
-            if (ctx.roundRect) {
-                ctx.roundRect(40, 40, canvas.width - 80, canvas.height - 80, 15);
-            } else {
-                ctx.rect(40, 40, canvas.width - 80, canvas.height - 80);
-            }
-            ctx.fill();
+            // Dibujar contenido
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 32px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Lic. Kenia de los Santos Andujar', canvas.width / 2, 60);
            
-            // Encabezado
-            ctx.fillStyle = '#1e293b';
+            ctx.font = '24px Arial';
+            ctx.fillText('Fisioterapeuta Profesional', canvas.width / 2, 100);
+           
+            // Dibujar icono según el problema
+            const problemData = contentDatabase[problem];
+            ctx.font = 'bold 36px Arial';
+            ctx.fillText(problemData.icon, canvas.width / 2, 160);
+           
             ctx.font = 'bold 28px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('LIC. KENIA DE LOS SANTOS ANDUJAR', canvas.width / 2, 100);
+            ctx.fillText(problemData.name.toUpperCase(), canvas.width / 2, 210);
            
-            ctx.font = 'bold 20px Arial';
-            ctx.fillStyle = '#475569';
-            ctx.fillText('FISIOTERAPEUTA PROFESIONAL', canvas.width / 2, 125);
+            // Dibujar línea divisoria
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(canvas.width * 0.1, 240);
+            ctx.lineTo(canvas.width * 0.9, 240);
+            ctx.stroke();
            
-            // Ícono del problema
-            ctx.font = '60px Arial';
-            ctx.fillText(problemData.icon, canvas.width / 2, 180);
-           
-            // Título del problema
-            ctx.fillStyle = '#dc2626';
-            ctx.font = 'bold 24px Arial';
-            const titleText = type === 'offer' ? `OFERTA ESPECIAL` :
-                             type === 'card' ? `TARJETA DE PRESENTACIÓN` :
-                             type === 'testimonial' ? `TESTIMONIO DE ÉXITO` :
-                             `¿Tienes ${problem}?`;
-           
-            wrapText(ctx, titleText, canvas.width / 2, 230, 680, 30);
-           
-            // Servicios
-            ctx.fillStyle = '#1e293b';
-            ctx.font = 'bold 20px Arial';
-            ctx.fillText('SERVICIOS ESPECIALIZADOS:', canvas.width / 2, 320);
-           
-            const services = [
-                '✓ Masoterapia Terapéutica',
-                '✓ TENS (Electroestimulación)',
-                '✓ Termoterapia y Crioterapia',
-                '✓ Servicio a Domicilio'
-            ];
-           
-            ctx.font = '16px Arial';
-            ctx.textAlign = 'left';
-            services.forEach((service, index) => {
-                ctx.fillText(service, 80, 350 + (index * 25));
-            });
-           
-            // Información de contacto
-            ctx.fillStyle = '#dc2626';
-            ctx.font = 'bold 24px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('📱 CONTACTO DIRECTO', canvas.width / 2, 470);
-           
-            ctx.font = 'bold 26px Arial';
-            ctx.fillStyle = '#1e293b';
-            ctx.fillText('WhatsApp: +1 (829) 697-4658', canvas.width / 2, 500);
-           
-            // Mensaje especial según tipo
-            ctx.fillStyle = type === 'offer' ? '#dc2626' : '#10b981';
-            ctx.font = 'bold 18px Arial';
-            if (type === 'offer') {
-                ctx.fillText('🎉 OFERTA POR TIEMPO LIMITADO 🎉', canvas.width / 2, 540);
+            // Dibujar mensaje según tipo
+            ctx.font = '20px Arial';
+            if (type === 'info') {
+                ctx.fillText('¿Sufres de ' + problemData.name + '?', canvas.width / 2, 280);
+                ctx.font = '18px Arial';
+                ctx.fillText('Te puedo ayudar con tratamientos especializados', canvas.width / 2, 310);
+            } else if (type === 'offer') {
+                ctx.fillText('¡OFERTA ESPECIAL!', canvas.width / 2, 280);
+                ctx.font = '18px Arial';
+                ctx.fillText('Aprovecha nuestros descuentos esta semana', canvas.width / 2, 310);
             } else if (type === 'card') {
-                ctx.fillText('💚 COMPARTE ESTA TARJETA CON QUIEN NECESITE 💚', canvas.width / 2, 540);
+                ctx.fillText('Tarjeta de Presentación', canvas.width / 2, 280);
+                ctx.font = '18px Arial';
+                ctx.fillText('Comparte con quien necesite ayuda profesional', canvas.width / 2, 310);
             } else {
-                ctx.fillText('¡Tu recuperación es nuestra prioridad!', canvas.width / 2, 540);
+                ctx.fillText('Historias de Éxito', canvas.width / 2, 280);
+                ctx.font = '18px Arial';
+                ctx.fillText('Testimonios reales de pacientes satisfechos', canvas.width / 2, 310);
             }
-        }
-       
-        function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
-            const words = text.split(' ');
-            let line = '';
-            let currentY = y;
            
-            for (let n = 0; n < words.length; n++) {
-                const testLine = line + words[n] + ' ';
-                const metrics = ctx.measureText(testLine);
-                const testWidth = metrics.width;
-               
-                if (testWidth > maxWidth && n > 0) {
-                    ctx.fillText(line, x, currentY);
-                    line = words[n] + ' ';
-                    currentY += lineHeight;
-                } else {
-                    line = testLine;
-                }
-            }
-            ctx.fillText(line, x, currentY);
+            // Dibujar información de contacto
+            ctx.font = 'bold 22px Arial';
+            ctx.fillText('📱 WhatsApp: +1 (829) 697-4658', canvas.width / 2, 500);
+           
+            ctx.font = '18px Arial';
+            ctx.fillText('📍 Servicio a domicilio disponible', canvas.width / 2, 540);
+           
+            // Dibujar pequeño texto promocional
+            ctx.font = '16px Arial';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.fillText('¡No dejes que el dolor limite tu vida!', canvas.width / 2, 580);
         }
 
         function downloadTemplate() {
@@ -575,12 +598,12 @@
         }
 
         function sendToWhatsApp() {
+            // Primero copiar el mensaje al portapapeles
+            copyMessage();
+           
+            // Luego abrir WhatsApp
             const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(currentMessage)}`;
             window.location.href = whatsappUrl;
-           
-            setTimeout(() => {
-                copyMessage();
-            }, 1000);
         }
 
         function generateAnother() {
