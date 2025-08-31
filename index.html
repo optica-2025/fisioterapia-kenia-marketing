@@ -11,7 +11,7 @@
             background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
         }
         .touch-btn {
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
@@ -22,6 +22,27 @@
         .touch-btn:active {
             transform: translateY(0px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .selected {
+            border: 3px solid #2563eb !important;
+            background: #dbeafe !important;
+            position: relative;
+        }
+        .selected::after {
+            content: '✓';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
         }
         .simple-card {
             background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
@@ -57,22 +78,22 @@
 </head>
 <body class="bg-gray-50">
     <div class="min-h-screen">
-        <!-- Header Simplificado -->
+        <!-- Header -->
         <div class="gradient-bg text-white py-8">
             <div class="max-w-4xl mx-auto px-4 text-center">
-                <h1 class="text-2xl font-bold mb-2">Sistema de Marketing</h1>
+                <h1 class="text-2xl font-bold mb-2">Sistema de Marketing Completo</h1>
                 <h2 class="text-xl">Lic. Kenia de los Santos Andujar</h2>
-                <p class="text-base opacity-90 mt-2">Crea mensajes para enviar a tus clientes</p>
+                <p class="text-base opacity-90 mt-2">Crea mensajes y plantillas visuales para tus clientes</p>
             </div>
         </div>
 
         <div class="max-w-4xl mx-auto px-4 py-6">
-            <!-- Opciones Principales Simplificadas -->
+            <!-- Opciones Principales -->
             <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
                 <h2 class="text-xl font-bold mb-6 text-center">¿Qué mensaje quieres crear?</h2>
                
                 <div class="grid gap-4 mb-6">
-                    <button onclick="createMessage('info')" class="touch-btn bg-blue-500 text-white p-6 rounded-xl text-left shadow-lg">
+                    <button onclick="selectMessageType('info')" id="type-info" class="touch-btn bg-blue-500 text-white p-6 rounded-xl text-left shadow-lg selected">
                         <div class="flex items-center">
                             <i class="fas fa-info-circle text-2xl mr-4"></i>
                             <div>
@@ -82,7 +103,7 @@
                         </div>
                     </button>
                    
-                    <button onclick="createMessage('offer')" class="touch-btn bg-purple-500 text-white p-6 rounded-xl text-left shadow-lg">
+                    <button onclick="selectMessageType('offer')" id="type-offer" class="touch-btn bg-purple-500 text-white p-6 rounded-xl text-left shadow-lg">
                         <div class="flex items-center">
                             <i class="fas fa-gift text-2xl mr-4"></i>
                             <div>
@@ -92,7 +113,7 @@
                         </div>
                     </button>
 
-                    <button onclick="createMessage('card')" class="touch-btn bg-orange-500 text-white p-6 rounded-xl text-left shadow-lg">
+                    <button onclick="selectMessageType('card')" id="type-card" class="touch-btn bg-orange-500 text-white p-6 rounded-xl text-left shadow-lg">
                         <div class="flex items-center">
                             <i class="fas fa-id-card text-2xl mr-4"></i>
                             <div>
@@ -101,48 +122,88 @@
                             </div>
                         </div>
                     </button>
+
+                    <button onclick="selectMessageType('testimonial')" id="type-testimonial" class="touch-btn bg-green-500 text-white p-6 rounded-xl text-left shadow-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-2xl mr-4"></i>
+                            <div>
+                                <h3 class="text-lg font-bold">Historias de Éxito</h3>
+                                <p class="text-sm opacity-90">Testimonios de pacientes</p>
+                            </div>
+                        </div>
+                    </button>
                 </div>
 
-                <!-- Selector de Problema (Simplificado) -->
+                <!-- Selector de Problema -->
                 <div class="mb-6">
                     <h3 class="text-lg font-bold mb-4">¿De qué problema quieres hablar?</h3>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button onclick="setProblem('espalda')" id="prob-espalda" class="touch-btn p-4 border-2 border-blue-500 bg-blue-50 rounded-lg">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <button onclick="selectProblem('espalda')" id="prob-espalda" class="touch-btn p-4 border-2 border-blue-500 bg-blue-50 rounded-lg selected">
                             <div class="text-2xl mb-1">🏃‍♂️</div>
                             <div class="font-medium text-sm">Espalda</div>
                         </button>
-                        <button onclick="setProblem('cuello')" id="prob-cuello" class="touch-btn p-4 border-2 border-gray-200 rounded-lg">
+                        <button onclick="selectProblem('cuello')" id="prob-cuello" class="touch-btn p-4 border-2 border-gray-200 rounded-lg">
                             <div class="text-2xl mb-1">💆‍♀️</div>
                             <div class="font-medium text-sm">Cuello</div>
                         </button>
-                        <button onclick="setProblem('rodilla')" id="prob-rodilla" class="touch-btn p-4 border-2 border-gray-200 rounded-lg">
+                        <button onclick="selectProblem('rodilla')" id="prob-rodilla" class="touch-btn p-4 border-2 border-gray-200 rounded-lg">
                             <div class="text-2xl mb-1">🦵</div>
                             <div class="font-medium text-sm">Rodilla</div>
                         </button>
-                        <button onclick="setProblem('general')" id="prob-general" class="touch-btn p-4 border-2 border-gray-200 rounded-lg">
+                        <button onclick="selectProblem('hombro')" id="prob-hombro" class="touch-btn p-4 border-2 border-gray-200 rounded-lg">
+                            <div class="text-2xl mb-1">💪</div>
+                            <div class="font-medium text-sm">Hombro</div>
+                        </button>
+                        <button onclick="selectProblem('pies')" id="prob-pies" class="touch-btn p-4 border-2 border-gray-200 rounded-lg">
+                            <div class="text-2xl mb-1">🦶</div>
+                            <div class="font-medium text-sm">Pies</div>
+                        </button>
+                        <button onclick="selectProblem('geriatrica')" id="prob-geriatrica" class="touch-btn p-4 border-2 border-gray-200 rounded-lg">
+                            <div class="text-2xl mb-1">👵</div>
+                            <div class="font-medium text-sm">Adultos Mayores</div>
+                        </button>
+                        <button onclick="selectProblem('deportiva')" id="prob-deportiva" class="touch-btn p-4 border-2 border-gray-200 rounded-lg">
+                            <div class="text-2xl mb-1">⚽</div>
+                            <div class="font-medium text-sm">Deportistas</div>
+                        </button>
+                        <button onclick="selectProblem('general')" id="prob-general" class="touch-btn p-4 border-2 border-gray-200 rounded-lg">
                             <div class="text-2xl mb-1">🏥</div>
-                            <div class="font-medium text-sm">Dolores</div>
+                            <div class="font-medium text-sm">General</div>
                         </button>
                     </div>
                 </div>
 
                 <div class="text-center">
                     <button onclick="generateMessage()" class="touch-btn bg-gradient-to-r from-green-500 to-blue-500 text-white py-4 px-8 rounded-xl font-bold text-lg shadow-lg">
-                        <i class="fas fa-magic mr-2"></i>Crear Mensaje
+                        <i class="fas fa-magic mr-2"></i>Crear Mensaje y Plantilla
                     </button>
                 </div>
             </div>
 
-            <!-- Mensaje Creado -->
+            <!-- Mensaje y Plantilla Generados -->
             <div id="messageResult" class="hidden">
+                <!-- Plantilla Visual -->
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                    <h3 class="text-xl font-bold mb-4 text-center">📱 Tu Mensaje Está Listo</h3>
+                    <h3 class="text-xl font-bold mb-4 text-center">🎨 Plantilla Visual Generada</h3>
+                    <div class="flex justify-center mb-4">
+                        <canvas id="templateCanvas" class="border border-gray-300 rounded-lg shadow-lg" style="max-width: 100%; max-height: 500px;"></canvas>
+                    </div>
+                    <div class="text-center">
+                        <button onclick="downloadTemplate()" class="touch-btn bg-purple-600 text-white py-3 px-6 rounded-xl font-bold shadow-lg">
+                            <i class="fas fa-download mr-2"></i>Descargar Plantilla
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mensaje de Texto -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4 text-center">📱 Mensaje de Texto</h3>
                    
                     <div class="simple-card">
-                        <div id="messageContent" class="text-sm leading-relaxed"></div>
+                        <div id="messageContent" class="text-sm leading-relaxed whitespace-pre-line"></div>
                        
-                        <!-- Botones que verán los clientes (vista previa) -->
-                        <div id="clientButtons" class="mt-6 pt-4 border-t-2 border-gray-100">
+                        <!-- Botones de Contacto (Vista Previa) -->
+                        <div class="mt-6 pt-4 border-t-2 border-gray-100">
                             <p class="text-center text-sm text-gray-600 mb-4">👆 Tus clientes verán estos botones:</p>
                             <div class="space-y-3">
                                 <div class="emergency-btn contact-btn">
@@ -158,7 +219,7 @@
                         </div>
                     </div>
                    
-                    <!-- Acciones para Kenia -->
+                    <!-- Acciones -->
                     <div class="grid gap-3 mt-6">
                         <button onclick="copyMessage()" class="touch-btn bg-green-600 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg">
                             <i class="fas fa-copy mr-2"></i>Copiar Mensaje Completo
@@ -166,32 +227,9 @@
                         <button onclick="sendToWhatsApp()" class="touch-btn bg-blue-600 text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg">
                             <i class="fab fa-whatsapp mr-2"></i>Enviar por WhatsApp
                         </button>
-                        <button onclick="createAnother()" class="touch-btn bg-gray-600 text-white py-3 px-6 rounded-xl font-bold shadow-lg">
-                            <i class="fas fa-plus mr-2"></i>Crear Otro Mensaje
+                        <button onclick="generateAnother()" class="touch-btn bg-gray-600 text-white py-3 px-6 rounded-xl font-bold shadow-lg">
+                            <i class="fas fa-refresh mr-2"></i>Generar Otra Variación
                         </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Instrucciones Simples -->
-            <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
-                <h2 class="text-lg font-bold mb-4 text-center">📋 Cómo usar esta herramienta:</h2>
-                <div class="space-y-3 text-sm">
-                    <div class="flex items-start">
-                        <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">1</span>
-                        <span>Selecciona qué tipo de mensaje quieres crear</span>
-                    </div>
-                    <div class="flex items-start">
-                        <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">2</span>
-                        <span>Elige sobre qué problema quieres hablar</span>
-                    </div>
-                    <div class="flex items-start">
-                        <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">3</span>
-                        <span>Toca "Crear Mensaje" y copia el resultado</span>
-                    </div>
-                    <div class="flex items-start">
-                        <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">4</span>
-                        <span>Envía el mensaje a tus clientes por WhatsApp</span>
                     </div>
                 </div>
             </div>
@@ -203,141 +241,204 @@
         let selectedProblem = 'espalda';
         let currentMessage = '';
 
-        const problems = {
-            espalda: { name: 'dolor de espalda', treatments: 'masajes terapéuticos, TENS, calor' },
-            cuello: { name: 'dolor de cuello', treatments: 'terapia manual, TENS, relajación' },
-            rodilla: { name: 'dolor de rodilla', treatments: 'fortalecimiento, TENS, frío' },
-            general: { name: 'dolores musculares', treatments: 'masoterapia, TENS, terapias' }
+        // Base de datos de contenido con múltiples variaciones
+        const contentDatabase = {
+            espalda: {
+                name: 'dolor de espalda',
+                icon: '🏃‍♂️',
+                problems: [
+                    'dolor lumbar crónico', 'contracturas de espalda', 'lumbago', 'ciática',
+                    'dolor al agacharse', 'rigidez matutina', 'dolor al estar sentado',
+                    'dolor entre omóplatos', 'hernia discal', 'escoliosis postural'
+                ],
+                treatments: [
+                    'masajes terapéuticos profundos', 'TENS para alivio inmediato', 'termoterapia localizada',
+                    'liberación miofascial', 'terapia manual vertebral', 'ejercicios de Williams',
+                    'fortalecimiento del core', 'tracciones suaves', 'movilizaciones articulares'
+                ]
+            },
+            cuello: {
+                name: 'dolor de cuello',
+                icon: '💆‍♀️',
+                problems: [
+                    'tortícolis aguda', 'rigidez cervical', 'dolor de cabeza tensional',
+                    'mareos cervicales', 'contractura del trapecio', 'síndrome cervical',
+                    'dolor al girar la cabeza', 'cervicalgia crónica'
+                ],
+                treatments: [
+                    'terapia manual cervical', 'TENS cervical especializado', 'liberación de puntos gatillo',
+                    'movilizaciones suaves', 'termoterapia localizada', 'ejercicios McKenzie',
+                    'relajación muscular progresiva', 'tracción manual'
+                ]
+            },
+            rodilla: {
+                name: 'dolor de rodilla',
+                icon: '🦵',
+                problems: [
+                    'artritis de rodilla', 'rodilla hinchada', 'dolor al caminar',
+                    'dificultad para subir escaleras', 'rigidez articular', 'condromalacia',
+                    'meniscopatía', 'bursitis rotuliana'
+                ],
+                treatments: [
+                    'fortalecimiento del cuádriceps', 'crioterapia post-ejercicio', 'TENS analgésico',
+                    'drenaje linfático manual', 'movilización patelar', 'ejercicios propioceptivos',
+                    'termoterapia pre-ejercicio', 'vendaje funcional'
+                ]
+            },
+            hombro: {
+                name: 'dolor de hombro',
+                icon: '💪',
+                problems: [
+                    'hombro congelado', 'síndrome del manguito rotador', 'bursitis subacromial',
+                    'tendinitis del bíceps', 'capsulitis adhesiva', 'pinzamiento subacromial',
+                    'dificultad para levantar el brazo', 'dolor nocturno'
+                ],
+                treatments: [
+                    'péndulos de Codman', 'movilizaciones capsulares', 'TENS para hombro',
+                    'termoterapia húmeda', 'liberación cicatricial', 'ejercicios de Kabat',
+                    'fortalecimiento excéntrico', 'crioterapia selectiva'
+                ]
+            },
+            pies: {
+                name: 'dolor de pies',
+                icon: '🦶',
+                problems: [
+                    'fascitis plantar', 'espolón calcáneo', 'metatarsalgia',
+                    'dolor en la planta del pie', 'hinchazón de pies', 'neuroma de Morton',
+                    'pie plano', 'calambres nocturnos'
+                ],
+                treatments: [
+                    'masoterapia plantar especializada', 'TENS para fascitis', 'crioterapia localizada',
+                    'liberación fascial profunda', 'ejercicios intrínsecos', 'termoterapia de contraste',
+                    'movilizaciones articulares', 'vendaje neuromuscular'
+                ]
+            },
+            geriatrica: {
+                name: 'problemas de adultos mayores',
+                icon: '👵',
+                problems: [
+                    'artritis generalizada', 'osteoporosis', 'pérdida de equilibrio',
+                    'debilidad muscular', 'rigidez generalizada', 'dolor crónico',
+                    'sarcopenia', 'fragilidad ósea'
+                ],
+                treatments: [
+                    'ejercicios de equilibrio adaptados', 'fortalecimiento suave', 'movilidad articular',
+                    'TENS geriátrico', 'termoterapia adaptada', 'prevención de caídas',
+                    'activación muscular', 'marcha terapéutica'
+                ]
+            },
+            deportiva: {
+                name: 'lesiones deportivas',
+                icon: '⚽',
+                problems: [
+                    'esguinces de tobillo', 'lesiones musculares', 'contracturas deportivas',
+                    'sobrecargas musculares', 'tendinitis deportiva', 'lesiones por impacto',
+                    'fatiga muscular', 'recuperación atlética'
+                ],
+                treatments: [
+                    'crioterapia inmediata', 'TENS deportivo', 'masoterapia deportiva especializada',
+                    'kinesiotaping funcional', 'ejercicios excéntricos', 'recuperación funcional',
+                    'pliometría adaptada', 'liberación activa'
+                ]
+            },
+            general: {
+                name: 'dolores musculares',
+                icon: '🏥',
+                problems: [
+                    'dolor muscular generalizado', 'tensión corporal', 'fatiga crónica',
+                    'contracturas múltiples', 'fibromialgia', 'estrés físico',
+                    'sobrecarga postural', 'dolor miofascial'
+                ],
+                treatments: [
+                    'masoterapia integral', 'TENS generalizado', 'termoterapia completa',
+                    'liberación miofascial global', 'relajación muscular', 'terapia manual',
+                    'ejercicios de estiramiento', 'técnicas de relajación'
+                ]
+            }
         };
 
-        function createMessage(type) {
+        // Plantillas de mensajes con múltiples variaciones
+        const messageTemplates = {
+            info: [
+                '🌟 ¿Tienes {problem}?\n\nComo fisioterapeuta profesional te puedo ayudar con:\n• {treatments}\n• Servicio a domicilio\n• Atención personalizada\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n¡No dejes que el dolor limite tu vida!',
+               
+                '💪 ¿Sufres de {problem}?\n\nTengo la solución profesional que necesitas:\n• {treatments}\n• Evaluación completa incluida\n• Horarios flexibles disponibles\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n¡Recupera tu bienestar hoy mismo!',
+               
+                '🏥 Tratamiento especializado para {problem}\n\nOfrecer soluciones efectivas:\n• {treatments}\n• Técnicas modernas comprobadas\n• Atención personalizada\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n¡Tu salud no puede esperar!'
+            ],
+            offer: [
+                '🎉 OFERTA ESPECIAL 🎉\n\n¿Sufres de {problem}?\n\n💰 ESTA SEMANA:\n✅ Primera consulta 50% descuento\n✅ Servicio a domicilio GRATIS\n✅ Evaluación completa incluida\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n⏰ Oferta por tiempo limitado',
+               
+                '💸 PROMOCIÓN LIMITADA 💸\n\nTratamiento para {problem}\n\n🎁 INCLUYE:\n• 3 sesiones por el precio de 2\n• Evaluación profesional gratis\n• Plan de ejercicios personalizado\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n🔥 Solo por esta semana',
+               
+                '⭐ DESCUENTO ESPECIAL ⭐\n\n¿Necesitas tratamiento para {problem}?\n\n💎 OFERTA EXCLUSIVA:\n• Consulta de evaluación GRATIS\n• 25% descuento en tratamientos\n• Servicio domiciliario sin costo\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n⏰ Cupos limitados'
+            ],
+            card: [
+                '💳 TARJETA DE PRESENTACIÓN\n\n🏥 LIC. KENIA DE LOS SANTOS ANDUJAR\n👩‍⚕️ FISIOTERAPEUTA PROFESIONAL\n\n🎯 ESPECIALIDADES:\n• Masoterapia terapéutica\n• TENS (electroestimulación)\n• Terapias de calor y frío\n• Rehabilitación profesional\n• Servicio a domicilio\n\n📱 WhatsApp: +1 (829) 697-4658\n⚡ Emergencias 24/7 disponibles\n⏰ Horarios flexibles\n\n💚 ¡Comparte esta tarjeta con quien necesite ayuda!'
+            ],
+            testimonial: [
+                '⭐ TESTIMONIO REAL ⭐\n\n"Llegué con {problem} severo y no podía realizar mis actividades diarias. Después del tratamiento profesional con la Lic. Kenia, he recuperado mi calidad de vida por completo."\n\n- Paciente satisfecha, 58 años\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n¡Únete a mis pacientes satisfechos!',
+               
+                '💬 HISTORIA DE ÉXITO 💬\n\nUna paciente de 67 años llegó con {problem} que la limitaba enormemente. Gracias al tratamiento integral y profesional, ahora disfruta de una vida activa sin dolor.\n\n✨ Resultados comprobados en casos reales\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n\n¡Tu recuperación es posible!'
+            ]
+        };
+
+        function selectMessageType(type) {
             messageType = type;
-            // Visual feedback
-            document.querySelectorAll('.touch-btn').forEach(btn => btn.classList.remove('ring-4', 'ring-blue-300'));
-            event.target.closest('.touch-btn').classList.add('ring-4', 'ring-blue-300');
+            document.querySelectorAll('[id^="type-"]').forEach(btn => btn.classList.remove('selected'));
+            document.getElementById(`type-${type}`).classList.add('selected');
         }
 
-        function setProblem(problem) {
+        function selectProblem(problem) {
             selectedProblem = problem;
-            document.querySelectorAll('[id^="prob-"]').forEach(btn => {
-                btn.className = 'touch-btn p-4 border-2 border-gray-200 rounded-lg';
-            });
-            document.getElementById(`prob-${problem}`).className = 'touch-btn p-4 border-2 border-blue-500 bg-blue-50 rounded-lg';
+            document.querySelectorAll('[id^="prob-"]').forEach(btn => btn.classList.remove('selected'));
+            document.getElementById(`prob-${problem}`).classList.add('selected');
         }
 
         function generateMessage() {
-            const problem = problems[selectedProblem];
-            let message = '';
+            const problemData = contentDatabase[selectedProblem];
+            const templates = messageTemplates[messageType];
+           
+            // Seleccionar variaciones aleatorias
+            const randomProblem = problemData.problems[Math.floor(Math.random() * problemData.problems.length)];
+            const randomTreatments = problemData.treatments.sort(() => 0.5 - Math.random()).slice(0, 3);
+            const randomTemplate = templates[Math.floor(Math.random() * templates.length)];
+           
+            // Generar mensaje
+            let message = randomTemplate
+                .replace('{problem}', randomProblem)
+                .replace('{treatments}', randomTreatments.join('\n• '));
 
-            if (messageType === 'info') {
-                message = `🌟 ¿Tienes ${problem.name}?
-
-Como fisioterapeuta profesional te puedo ayudar con:
-• ${problem.treatments}
-• Servicio a domicilio
-• Atención personalizada
-
-📞 Lic. Kenia de los Santos Andujar
-📱 WhatsApp: +1 (829) 697-4658
-
-¡No dejes que el dolor limite tu vida!
-
-👇 TOCA EL BOTÓN QUE NECESITES: 👇`;
-
-            } else if (messageType === 'offer') {
-                message = `🎉 OFERTA ESPECIAL 🎉
-
-¿Sufres de ${problem.name}?
-
-💰 ESTA SEMANA:
-✅ Primera consulta 50% descuento
-✅ Servicio a domicilio GRATIS
-✅ Evaluación completa incluida
-
-📞 Lic. Kenia de los Santos Andujar
-📱 WhatsApp: +1 (829) 697-4658
-
-⏰ Oferta por tiempo limitado
-
-👇 TOCA EL BOTÓN QUE NECESITES: 👇`;
-
-            } else if (messageType === 'card') {
-                message = `💳 TARJETA DE PRESENTACIÓN
-
-🏥 LIC. KENIA DE LOS SANTOS ANDUJAR
-👩‍⚕️ FISIOTERAPEUTA PROFESIONAL
-
-🎯 ESPECIALIDADES:
-• Masoterapia terapéutica
-• TENS (electroestimulación)
-• Terapias de calor y frío
-• Rehabilitación profesional
-• Servicio a domicilio
-
-📱 WhatsApp: +1 (829) 697-4658
-⚡ Emergencias 24/7 disponibles
-⏰ Horarios flexibles
-
-💚 ¡Comparte esta tarjeta con quien necesite ayuda!
-
-👇 TOCA EL BOTÓN QUE NECESITES: 👇`;
-            }
-
-            // Agregar botones funcionales
-            message += `
-
-🚨 EMERGENCIA (Dolor muy fuerte):
-https://wa.me/18296974658?text=🚨%20EMERGENCIA%20-%20Tengo%20dolor%20muy%20fuerte%20y%20necesito%20ayuda%20urgente.%20Mi%20nombre:%20_____%20Mi%20problema:%20_____%20Mi%20dirección:%20_____
-
-📅 AGENDAR CITA:
-https://wa.me/18296974658?text=📅%20Hola%20Doctora%20Kenia,%20quiero%20agendar%20una%20cita.%20Mi%20nombre:%20_____%20Mi%20problema:%20_____%20Día%20que%20me%20conviene:%20_____
-
-👥 RECOMENDAR FAMILIAR:
-https://wa.me/18296974658?text=👥%20Quiero%20recomendar%20a%20un%20familiar.%20Su%20nombre:%20_____%20Su%20teléfono:%20_____%20Su%20problema:%20_____`;
+            // Agregar botones de contacto
+            message += '\n\n👇 TOCA EL BOTÓN QUE NECESITES: 👇\n\n';
+            message += '🚨 EMERGENCIA (Dolor muy fuerte):\n';
+            message += `https://wa.me/18296974658?text=🚨%20EMERGENCIA%20-%20Tengo%20dolor%20muy%20fuerte%20y%20necesito%20ayuda%20urgente.%20Mi%20nombre:%20_____%20Mi%20problema:%20_____%20Mi%20dirección:%20_____\n\n`;
+            message += '📅 AGENDAR CITA:\n';
+            message += `https://wa.me/18296974658?text=📅%20Hola%20Doctora%20Kenia,%20quiero%20agendar%20una%20cita.%20Mi%20nombre:%20_____%20Mi%20problema:%20_____%20Día%20que%20me%20conviene:%20_____\n\n`;
+            message += '👥 RECOMENDAR FAMILIAR:\n';
+            message += `https://wa.me/18296974658?text=👥%20Quiero%20recomendar%20a%20un%20familiar.%20Su%20nombre:%20_____%20Su%20teléfono:%20_____%20Su%20problema:%20_____`;
 
             currentMessage = message;
-            document.getElementById('messageContent').innerHTML = message.replace(/\n/g, '<br>');
+            document.getElementById('messageContent').textContent = message;
+           
+            // Generar plantilla visual
+            generateTemplate(problemData, randomProblem, messageType);
+           
             document.getElementById('messageResult').classList.remove('hidden');
             document.getElementById('messageResult').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function copyMessage() {
-            if (currentMessage) {
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(currentMessage).then(() => {
-                        alert('✅ Mensaje copiado. Ahora ábrelo en WhatsApp y envíalo a tus clientes.');
-                    });
-                } else {
-                    const textArea = document.createElement('textarea');
-                    textArea.value = currentMessage;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textArea);
-                    alert('✅ Mensaje copiado. Ahora ábrelo en WhatsApp y envíalo a tus clientes.');
-                }
-            }
-        }
-
-        function sendToWhatsApp() {
-            const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(currentMessage)}`;
-            window.location.href = whatsappUrl;
+        function generateTemplate(problemData, problem, type) {
+            const canvas = document.getElementById('templateCanvas');
+            const ctx = canvas.getContext('2d');
            
-            // Fallback después de 1 segundo si no se abrió WhatsApp
-            setTimeout(() => {
-                copyMessage();
-            }, 1000);
-        }
-
-        function createAnother() {
-            document.getElementById('messageResult').classList.add('hidden');
-            document.querySelector('h2').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', function() {
-            setProblem('espalda');
-        });
-    </script>
-</body>
-</html> 
+            canvas.width = 800;
+            canvas.height = 600;
+           
+            // Fondo degradado
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            if (type === 'offer') {
+                gradient.addColorStop(0, '#8b5cf6');
+                gradient.addColorStop(1, '#6366f1');
+            } else if (type === 'card') {
+                gradient.addColorStop(0, 
