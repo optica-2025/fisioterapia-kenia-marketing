@@ -3,217 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lic. Kenia de los Santos Andujar - Fisioterapia Profesional</title>
+    <title>Marketing Fisioterapia - Lic. Kenia de los Santos Andujar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        .emergency-pulse {
+        .client-button {
+            font-size: 18px;
+            padding: 15px 25px;
+            margin: 10px 5px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-height: 60px;
+        }
+        .emergency-btn {
+            background: #dc2626;
+            color: white;
             animation: pulse 2s infinite;
+        }
+        .appointment-btn {
+            background: #059669;
+            color: white;
+        }
+        .referral-btn {
+            background: #7c3aed;
+            color: white;
         }
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
-        .btn-active {
-            border-color: #3b82f6 !important;
-            background-color: #dbeafe !important;
-        }
     </style>
 </head>
 <body class="bg-gray-50">
     <div class="min-h-screen">
-        <!-- Header -->
+        <!-- Header para Kenia -->
         <div class="gradient-bg text-white py-6">
             <div class="max-w-6xl mx-auto px-4 text-center">
-                <h1 class="text-4xl font-bold mb-2">Lic. Kenia de los Santos Andujar</h1>
-                <p class="text-xl">Fisioterapeuta Profesional</p>
-                <p class="text-lg opacity-90">Servicios Especializados • Atención Domiciliaria • Tratamientos de Emergencia</p>
-                <div class="mt-4 flex justify-center space-x-4">
-                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
-                        <i class="fas fa-phone mr-2"></i>+1 (829) 697-4658
-                    </div>
-                </div>
+                <h1 class="text-3xl font-bold mb-2">Sistema de Marketing Digital</h1>
+                <h2 class="text-2xl font-semibold">Lic. Kenia de los Santos Andujar - Fisioterapeuta</h2>
+                <p class="text-lg opacity-90 mt-2">Genera contenido para enviar a tus clientes por WhatsApp</p>
             </div>
         </div>
 
-        <!-- Emergency Button -->
-        <div class="max-w-6xl mx-auto px-4 -mt-4 mb-6">
-            <div class="bg-red-500 text-white rounded-lg p-4 text-center emergency-pulse shadow-2xl">
-                <a href="https://wa.me/18296974658?text=%F0%9F%9A%A8%20LLAMADA%20DE%20EMERGENCIA%20%F0%9F%9A%A8%0A%0ANecesito%20atenci%C3%B3n%20URGENTE%20por%20dolor%20severo%20que%20no%20puedo%20soportar.%0A%0A%E2%9A%A0%EF%B8%8F%20Requiero%20tratamiento%20inmediato%0A%F0%9F%93%8D%20Solicito%20servicio%20a%20domicilio%20de%20emergencia%0A%E2%8F%B0%20Disponible%20ahora%20para%20atenci%C3%B3n%0A%0APor%20favor%20contactarme%20lo%20antes%20posible." target="_blank" class="block w-full">
-                    <i class="fas fa-exclamation-triangle text-2xl mr-3"></i>
-                    <span class="text-xl font-bold">LLAMADA DE EMERGENCIA - DOLOR SEVERO</span>
-                    <i class="fas fa-exclamation-triangle text-2xl ml-3"></i>
-                    <p class="text-sm mt-2">¿No puedes soportar el dolor? Contacto inmediato para atención urgente</p>
-                </a>
-            </div>
-        </div>
-
-        <div class="max-w-6xl mx-auto px-4">
-            <!-- Quick Actions -->
-            <div class="grid md:grid-cols-3 gap-4 mb-8">
-                <a href="https://wa.me/18296974658?text=%F0%9F%93%85%20SOLICITUD%20DE%20CITA%0A%0AHola%20Lic.%20Kenia%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita%20para%3A%0A%0A%F0%9F%91%A4%20Nombre%3A%20_____________%0A%F0%9F%93%9D%20Problema%3A%20_____________%0A%F0%9F%93%85%20Fecha%20preferida%3A%20_____________%0A%E2%8F%B0%20Horario%20preferido%3A%20_____________%0A%F0%9F%93%8D%20Ubicaci%C3%B3n%3A%20_____________%0A%0A%C2%BFQu%C3%A9%20disponibilidad%20tiene%3F%0AGracias." target="_blank" class="bg-green-500 hover:bg-green-600 text-white p-6 rounded-lg text-center transition-all shadow-lg block">
-                    <i class="fas fa-calendar-plus text-3xl mb-3"></i>
-                    <h3 class="text-xl font-bold">Agendar Cita</h3>
-                    <p class="text-sm">Programa tu consulta</p>
-                </a>
-                <a href="https://wa.me/18296974658?text=%F0%9F%8F%A0%20SERVICIO%20A%20DOMICILIO%0A%0ASolicito%20informaci%C3%B3n%20sobre%20atenci%C3%B3n%20fisioterap%C3%A9utica%20en%20mi%20hogar%3A%0A%0A%F0%9F%93%8D%20Direcci%C3%B3n%3A%20_____________%0A%F0%9F%91%A4%20Paciente%3A%20_____________%0A%F0%9F%A9%BA%20Condici%C3%B3n%3A%20_____________%0A%F0%9F%93%85%20Disponibilidad%3A%20_____________%0A%0A%C2%BFCu%C3%A1les%20son%20los%20costos%20y%20disponibilidad%20para%20servicio%20domiciliario%3F%0AGracias." target="_blank" class="bg-blue-500 hover:bg-blue-600 text-white p-6 rounded-lg text-center transition-all shadow-lg block">
-                    <i class="fas fa-home text-3xl mb-3"></i>
-                    <h3 class="text-xl font-bold">Servicio a Domicilio</h3>
-                    <p class="text-sm">Tratamiento en tu hogar</p>
-                </a>
-                <a href="https://wa.me/18296974658?text=%F0%9F%92%AC%20CONSULTA%20INFORMATIVA%0A%0AHola%20Lic.%20Kenia%2C%20necesito%20informaci%C3%B3n%20sobre%3A%0A%0A%E2%9D%93%20Tratamiento%20para%3A%20_____________%0A%E2%9D%93%20Tipo%20de%20terapia%20recomendada%3A%20_____________%0A%E2%9D%93%20Duraci%C3%B3n%20del%20tratamiento%3A%20_____________%0A%E2%9D%93%20Costos%3A%20_____________%0A%0AAgradezco%20su%20orientaci%C3%B3n%20profesional.%0ASaludos." target="_blank" class="bg-purple-500 hover:bg-purple-600 text-white p-6 rounded-lg text-center transition-all shadow-lg block">
-                    <i class="fas fa-info-circle text-3xl mb-3"></i>
-                    <h3 class="text-xl font-bold">Consulta Informativa</h3>
-                    <p class="text-sm">Pregunta sobre tratamientos</p>
-                </a>
-            </div>
-
-            <!-- Marketing Generator -->
+        <div class="max-w-6xl mx-auto px-4 py-6">
+            <!-- Selector de Tipo de Contenido -->
             <div class="bg-white rounded-lg shadow-xl p-6 mb-8">
-                <h2 class="text-2xl font-bold mb-6 text-center">Generador de Contenido de Marketing</h2>
+                <h2 class="text-2xl font-bold mb-6 text-center">Selecciona Qué Contenido Crear</h2>
                
-                <!-- Category Selection -->
-                <div class="mb-6">
-                    <h3 class="text-lg font-semibold mb-4">Selecciona Área de Tratamiento:</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-3" id="categoryGrid">
-                        <button onclick="setCategory('espalda')" id="cat-espalda" class="p-4 border-2 border-blue-500 bg-blue-50 rounded-lg hover:bg-blue-50 transition-all">
-                            <div class="text-2xl mb-2">🏃‍♂️</div>
-                            <div class="font-medium text-sm">Dolor de Espalda</div>
-                        </button>
-                        <button onclick="setCategory('cuello')" id="cat-cuello" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-50 transition-all">
-                            <div class="text-2xl mb-2">🦒</div>
-                            <div class="font-medium text-sm">Dolor de Cuello</div>
-                        </button>
-                        <button onclick="setCategory('rodilla')" id="cat-rodilla" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-50 transition-all">
-                            <div class="text-2xl mb-2">🦵</div>
-                            <div class="font-medium text-sm">Dolor de Rodilla</div>
-                        </button>
-                        <button onclick="setCategory('hombro')" id="cat-hombro" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-50 transition-all">
-                            <div class="text-2xl mb-2">💪</div>
-                            <div class="font-medium text-sm">Dolor de Hombro</div>
-                        </button>
-                        <button onclick="setCategory('pies')" id="cat-pies" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-50 transition-all">
-                            <div class="text-2xl mb-2">🦶</div>
-                            <div class="font-medium text-sm">Dolor de Pies</div>
-                        </button>
-                        <button onclick="setCategory('geriatrica')" id="cat-geriatrica" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-50 transition-all">
-                            <div class="text-2xl mb-2">👴</div>
-                            <div class="font-medium text-sm">Terapia Geriátrica</div>
-                        </button>
-                        <button onclick="setCategory('deportiva')" id="cat-deportiva" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-50 transition-all">
-                            <div class="text-2xl mb-2">⚽</div>
-                            <div class="font-medium text-sm">Lesiones Deportivas</div>
-                        </button>
-                        <button onclick="setCategory('neurologica')" id="cat-neurologica" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-50 transition-all">
-                            <div class="text-2xl mb-2">🧠</div>
-                            <div class="font-medium text-sm">Rehabilitación Neurológica</div>
-                        </button>
-                    </div>
+                <div class="grid md:grid-cols-3 gap-6 mb-6">
+                    <button onclick="generateContentForClients('educational')" class="bg-blue-500 hover:bg-blue-600 text-white p-6 rounded-lg text-center transition-all shadow-lg">
+                        <i class="fas fa-graduation-cap text-3xl mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">Contenido Educativo</h3>
+                        <p class="text-sm">Para enseñar sobre problemas y tratamientos</p>
+                    </button>
+                   
+                    <button onclick="generateContentForClients('promotion')" class="bg-purple-500 hover:bg-purple-600 text-white p-6 rounded-lg text-center transition-all shadow-lg">
+                        <i class="fas fa-percentage text-3xl mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">Ofertas y Promociones</h3>
+                        <p class="text-sm">Para promocionar descuentos especiales</p>
+                    </button>
+                   
+                    <button onclick="generateContentForClients('service')" class="bg-green-500 hover:bg-green-600 text-white p-6 rounded-lg text-center transition-all shadow-lg">
+                        <i class="fas fa-hands-helping text-3xl mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">Recordatorio de Servicios</h3>
+                        <p class="text-sm">Para recordar qué servicios ofreces</p>
+                    </button>
                 </div>
 
-                <!-- Template Type Selection -->
+                <!-- Selector de Área de Dolor -->
                 <div class="mb-6">
-                    <h3 class="text-lg font-semibold mb-4">Tipo de Contenido:</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <button onclick="setTemplateType('educational')" id="btn-educational" class="p-3 border-2 border-blue-500 bg-blue-50 rounded-lg hover:bg-blue-50 transition-all">
-                            <i class="fas fa-book text-blue-500 mb-2"></i>
-                            <div class="font-medium">Educativo</div>
+                    <h3 class="text-lg font-semibold mb-4">¿Sobre qué problema quieres hablar?</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <button onclick="setCategory('espalda')" id="cat-espalda" class="p-4 border-2 border-blue-500 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all">
+                            <div class="text-3xl mb-2">🏃‍♂️</div>
+                            <div class="font-medium text-sm">Espalda</div>
                         </button>
-                        <button onclick="setTemplateType('testimonial')" id="btn-testimonial" class="p-3 border-2 border-gray-200 rounded-lg hover:bg-green-50 transition-all">
-                            <i class="fas fa-star text-green-500 mb-2"></i>
-                            <div class="font-medium">Testimonial</div>
+                        <button onclick="setCategory('cuello')" id="cat-cuello" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-100 transition-all">
+                            <div class="text-3xl mb-2">🦒</div>
+                            <div class="font-medium text-sm">Cuello</div>
                         </button>
-                        <button onclick="setTemplateType('emergency')" id="btn-emergency" class="p-3 border-2 border-gray-200 rounded-lg hover:bg-red-50 transition-all">
-                            <i class="fas fa-exclamation text-red-500 mb-2"></i>
-                            <div class="font-medium">Urgencia</div>
+                        <button onclick="setCategory('rodilla')" id="cat-rodilla" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-100 transition-all">
+                            <div class="text-3xl mb-2">🦵</div>
+                            <div class="font-medium text-sm">Rodilla</div>
                         </button>
-                        <button onclick="setTemplateType('prevention')" id="btn-prevention" class="p-3 border-2 border-gray-200 rounded-lg hover:bg-yellow-50 transition-all">
-                            <i class="fas fa-shield text-yellow-500 mb-2"></i>
-                            <div class="font-medium">Prevención</div>
+                        <button onclick="setCategory('hombro')" id="cat-hombro" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-100 transition-all">
+                            <div class="text-3xl mb-2">💪</div>
+                            <div class="font-medium text-sm">Hombro</div>
                         </button>
-                        <button onclick="setTemplateType('promotion')" id="btn-promotion" class="p-3 border-2 border-gray-200 rounded-lg hover:bg-purple-50 transition-all">
-                            <i class="fas fa-percentage text-purple-500 mb-2"></i>
-                            <div class="font-medium">Promoción</div>
+                        <button onclick="setCategory('pies')" id="cat-pies" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-100 transition-all">
+                            <div class="text-3xl mb-2">🦶</div>
+                            <div class="font-medium text-sm">Pies</div>
                         </button>
-                        <button onclick="setTemplateType('service')" id="btn-service" class="p-3 border-2 border-gray-200 rounded-lg hover:bg-indigo-50 transition-all">
-                            <i class="fas fa-cogs text-indigo-500 mb-2"></i>
-                            <div class="font-medium">Servicios</div>
+                        <button onclick="setCategory('geriatrica')" id="cat-geriatrica" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-100 transition-all">
+                            <div class="text-3xl mb-2">👵</div>
+                            <div class="font-medium text-sm">Adultos Mayores</div>
+                        </button>
+                        <button onclick="setCategory('general')" id="cat-general" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-100 transition-all">
+                            <div class="text-3xl mb-2">🏥</div>
+                            <div class="font-medium text-sm">General</div>
+                        </button>
+                        <button onclick="setCategory('deportiva')" id="cat-deportiva" class="p-4 border-2 border-gray-200 rounded-lg hover:bg-blue-100 transition-all">
+                            <div class="text-3xl mb-2">⚽</div>
+                            <div class="font-medium text-sm">Deportistas</div>
                         </button>
                     </div>
                 </div>
 
                 <div class="text-center">
-                    <button onclick="generateContent()" id="generateBtn" class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 px-8 rounded-lg font-bold text-lg hover:from-indigo-700 hover:to-purple-700 transition-all">
-                        <i class="fas fa-magic mr-2"></i>Generar Contenido de Marketing
+                    <button onclick="generateAdvancedContent()" class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 px-8 rounded-lg font-bold text-lg hover:from-indigo-700 hover:to-purple-700 transition-all transform hover:scale-105">
+                        <i class="fas fa-magic mr-2"></i>Crear Contenido Personalizado
                     </button>
                 </div>
             </div>
 
-            <!-- Generated Content Display -->
-            <div id="contentDisplay" class="hidden bg-white rounded-lg shadow-xl p-6 mb-8">
-                <h3 class="text-xl font-bold mb-4">Contenido Generado:</h3>
-                <div id="contentText" class="bg-gray-50 p-4 rounded-lg mb-4 whitespace-pre-line"></div>
-                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
-                    <button onclick="shareWhatsApp()" class="bg-green-500 text-white py-3 px-4 rounded-lg hover:bg-green-600 transition-all">
-                        <i class="fab fa-whatsapp mr-2"></i>Compartir en WhatsApp
-                    </button>
-                    <button onclick="copyContent()" class="bg-blue-500 text-white py-3 px-4 rounded-lg hover:bg-blue-600 transition-all">
-                        <i class="fas fa-copy mr-2"></i>Copiar Texto
-                    </button>
-                    <button onclick="downloadImage()" class="bg-purple-500 text-white py-3 px-4 rounded-lg hover:bg-purple-600 transition-all">
-                        <i class="fas fa-download mr-2"></i>Descargar Imagen
-                    </button>
+            <!-- Contenido Generado -->
+            <div id="contentDisplay" class="hidden">
+                <div class="bg-white rounded-lg shadow-xl p-6 mb-8">
+                    <h3 class="text-2xl font-bold mb-4 text-center">📱 Mensaje Listo para Enviar</h3>
+                    <div class="bg-gray-100 p-2 rounded mb-4 text-center">
+                        <small class="text-gray-600">Este es el mensaje que recibirán tus clientes:</small>
+                    </div>
+                   
+                    <!-- Vista previa como lo verá el cliente -->
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-4">
+                        <div id="contentText" class="whitespace-pre-line text-sm"></div>
+                       
+                        <!-- Botones que verá el cliente (simulados) -->
+                        <div class="mt-4 pt-4 border-t border-green-200">
+                            <p class="text-xs text-green-700 mb-3">👇 Los clientes verán estos botones:</p>
+                            <div class="space-y-2">
+                                <div class="client-button emergency-btn text-center">
+                                    ⚡ EMERGENCIA - DOLOR SEVERO ⚡
+                                </div>
+                                <div class="client-button appointment-btn text-center">
+                                    📅 AGENDAR MI CITA
+                                </div>
+                                <div class="client-button referral-btn text-center">
+                                    👥 REFERIR UN FAMILIAR
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <!-- Acciones para Kenia -->
+                    <div class="grid md:grid-cols-3 gap-3">
+                        <button onclick="copyContent()" class="bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-all">
+                            <i class="fas fa-copy mr-2"></i>Copiar Mensaje Completo
+                        </button>
+                        <button onclick="openWhatsAppWeb()" class="bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-all">
+                            <i class="fab fa-whatsapp mr-2"></i>Abrir WhatsApp Web
+                        </button>
+                        <button onclick="generateNew()" class="bg-purple-600 text-white py-3 px-4 rounded-lg hover:bg-purple-700 transition-all">
+                            <i class="fas fa-refresh mr-2"></i>Generar Otro
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Canvas for Image Generation -->
-            <div class="bg-white rounded-lg shadow-xl p-6 mb-8">
-                <h3 class="text-xl font-bold mb-4 text-center">Vista Previa del Post</h3>
-                <div class="flex justify-center">
-                    <canvas id="marketingCanvas" class="border border-gray-300 rounded-lg shadow-lg" style="max-width: 100%; max-height: 600px;"></canvas>
-                </div>
-            </div>
-
-            <!-- Services Information -->
-            <div class="bg-white rounded-lg shadow-xl p-6 mb-8">
-                <h2 class="text-2xl font-bold mb-6 text-center">Servicios Profesionales Especializados</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="text-center p-4 bg-blue-50 rounded-lg">
-                        <i class="fas fa-hands text-4xl text-blue-600 mb-3"></i>
-                        <h3 class="font-bold">Masoterapia</h3>
-                        <p class="text-sm text-gray-600">Especializada y terapéutica</p>
+            <!-- Instrucciones para Kenia -->
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
+                <h2 class="text-xl font-bold mb-4">📋 Instrucciones de Uso:</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold mb-2">🔄 Paso 1 - Crear contenido:</h3>
+                        <ul class="text-sm space-y-1">
+                            <li>• Selecciona el tipo de mensaje</li>
+                            <li>• Elige el área de dolor</li>
+                            <li>• Genera el contenido</li>
+                            <li>• Copia el mensaje completo</li>
+                        </ul>
                     </div>
-                    <div class="text-center p-4 bg-green-50 rounded-lg">
-                        <i class="fas fa-bolt text-4xl text-green-600 mb-3"></i>
-                        <h3 class="font-bold">Electroterapia TENS</h3>
-                        <p class="text-sm text-gray-600">Alivio inmediato del dolor</p>
-                    </div>
-                    <div class="text-center p-4 bg-red-50 rounded-lg">
-                        <i class="fas fa-thermometer-hot text-4xl text-red-600 mb-3"></i>
-                        <h3 class="font-bold">Termoterapia</h3>
-                        <p class="text-sm text-gray-600">Calor terapéutico</p>
-                    </div>
-                    <div class="text-center p-4 bg-cyan-50 rounded-lg">
-                        <i class="fas fa-snowflake text-4xl text-cyan-600 mb-3"></i>
-                        <h3 class="font-bold">Crioterapia</h3>
-                        <p class="text-sm text-gray-600">Terapia de frío</p>
-                    </div>
-                </div>
-               
-                <div class="mt-6 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
-                    <h3 class="font-bold text-lg mb-3">Técnicas Especializadas Adicionales:</h3>
-                    <div class="grid md:grid-cols-2 gap-4 text-sm">
-                        <div>• Drenaje Linfático Manual</div>
-                        <div>• Liberación Miofascial</div>
-                        <div>• Terapia Manual Articular</div>
-                        <div>• Rehabilitación Post-quirúrgica</div>
-                        <div>• Terapia Geriátrica Especializada</div>
-                        <div>• Tratamientos Deportivos</div>
-                        <div>• Manejo de Fibromialgia</div>
-                        <div>• Terapia para Artritis</div>
+                    <div>
+                        <h3 class="font-bold mb-2">📲 Paso 2 - Enviar a clientes:</h3>
+                        <ul class="text-sm space-y-1">
+                            <li>• Pega el mensaje en WhatsApp</li>
+                            <li>• Envía a tu lista de contactos</li>
+                            <li>• Los clientes verán botones simples</li>
+                            <li>• Recibirás sus respuestas automáticamente</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -222,130 +194,159 @@
 
     <script>
         let selectedCategory = 'espalda';
-        let selectedTemplateType = 'educational';
+        let contentType = 'educational';
         let generatedContent = '';
 
-        // Comprehensive categories with content variations
         const categories = {
             espalda: {
                 name: 'Dolor de Espalda',
                 icon: '🏃‍♂️',
                 problems: [
-                    'dolor lumbar crónico', 'contracturas cervicales', 'escoliosis postural',
-                    'hernia discal', 'dolor entre omóplatos', 'lumbago agudo',
-                    'ciática', 'espondilosis', 'lordosis cervical', 'cifosis dorsal'
-                ],
-                treatments: [
-                    'Masoterapia descontracturante', 'TENS para alivio inmediato', 'Termoterapia profunda',
-                    'Liberación miofascial', 'Terapia manual vertebral', 'Ejercicios de Williams',
-                    'Estabilización core', 'Tracción cervical', 'Movilizaciones articulares'
+                    'dolor lumbar', 'dolor de espalda baja', 'contracturas', 'lumbago',
+                    'ciática', 'dolor al agacharse', 'rigidez matutina', 'dolor al estar sentado'
                 ]
             },
             cuello: {
                 name: 'Dolor de Cuello',
                 icon: '🦒',
                 problems: [
-                    'tortícolis aguda', 'síndrome cervical', 'whiplash', 'contractura del trapecio',
-                    'cefaleas tensionales', 'síndrome del escaleno', 'rectificación cervical',
-                    'neuralgia occipital', 'esguince cervical', 'síndrome facetario'
-                ],
-                treatments: [
-                    'Terapia manual cervical', 'TENS cervical', 'Liberación de puntos gatillo',
-                    'Movilizaciones suaves', 'Termoterapia localizada', 'Ejercicios McKenzie',
-                    'Estiramiento miofascial', 'Tracción manual', 'Relajación muscular'
+                    'tortícolis', 'dolor de cuello', 'rigidez cervical', 'dolor de cabeza',
+                    'mareos', 'contractura del cuello', 'dolor al girar la cabeza'
                 ]
             },
             rodilla: {
                 name: 'Dolor de Rodilla',
                 icon: '🦵',
                 problems: [
-                    'síndrome patelofemoral', 'condromalacia', 'lesión del menisco',
-                    'artritis de rodilla', 'tendinitis rotuliana', 'bursitis',
-                    'síndrome cintilla iliotibial', 'inestabilidad articular', 'artrosis',
-                    'lesión ligamentaria'
-                ],
-                treatments: [
-                    'Fortalecimiento del cuádriceps', 'Crioterapia post-ejercicio', 'TENS analgésico',
-                    'Drenaje linfático', 'Movilización patelar', 'Ejercicios propioceptivos',
-                    'Termoterapia pre-ejercicio', 'Liberación fascial', 'Vendaje funcional'
+                    'dolor de rodilla', 'rodilla hinchada', 'dificultad para caminar',
+                    'dolor al subir escaleras', 'rigidez articular', 'artritis'
                 ]
             },
             hombro: {
                 name: 'Dolor de Hombro',
                 icon: '💪',
                 problems: [
-                    'síndrome del manguito rotador', 'hombro congelado', 'bursitis subacromial',
-                    'tendinitis del bíceps', 'capsulitis adhesiva', 'pinzamiento subacromial',
-                    'luxación recidivante', 'tendinosis del supraespinoso', 'síndrome de salida torácica',
-                    'artritis glenohumeral'
-                ],
-                treatments: [
-                    'Péndulos de Codman', 'Movilizaciones capsulares', 'TENS para hombro',
-                    'Termoterapia húmeda', 'Liberación cicatricial', 'Ejercicios de Kabat',
-                    'Fortalecimiento excéntrico', 'Drenaje postural', 'Crioterapia selectiva'
+                    'dolor de hombro', 'hombro congelado', 'dificultad para levantar el brazo',
+                    'dolor al dormir', 'rigidez del hombro', 'debilidad en el brazo'
                 ]
             },
             pies: {
                 name: 'Dolor de Pies',
                 icon: '🦶',
                 problems: [
-                    'fascitis plantar', 'espolón calcáneo', 'metatarsalgia',
-                    'neuroma de Morton', 'pie plano', 'pie cavo', 'hallux valgus',
-                    'tendinitis aquílea', 'síndrome del túnel tarsiano', 'sesamoiditis'
-                ],
-                treatments: [
-                    'Masoterapia plantar', 'TENS para fascitis', 'Crioterapia localizada',
-                    'Liberación fascial profunda', 'Ejercicios de músculos intrínsecos', 'Ondas de choque',
-                    'Termoterapia de contraste', 'Movilizaciones articulares', 'Vendaje neuromuscular'
+                    'dolor en la planta del pie', 'fascitis plantar', 'espolón',
+                    'dolor al caminar', 'hinchazón de pies', 'calambres'
                 ]
             },
             geriatrica: {
-                name: 'Terapia Geriátrica',
-                icon: '👴',
+                name: 'Problemas de Adultos Mayores',
+                icon: '👵',
                 problems: [
-                    'artritis generalizada', 'osteoporosis', 'sarcopenia', 'fragilidad',
-                    'pérdida de equilibrio', 'rigidez articular', 'dolor crónico',
-                    'limitación funcional', 'deterioro postural', 'claudicación'
-                ],
-                treatments: [
-                    'Ejercicios de equilibrio', 'Fortalecimiento suave', 'Movilidad articular',
-                    'TENS geriátrico', 'Termoterapia adaptada', 'Marcha terapéutica',
-                    'Prevención de caídas', 'Activación muscular', 'Hidroterapia'
+                    'artritis', 'osteoporosis', 'pérdida de equilibrio',
+                    'debilidad muscular', 'rigidez generalizada', 'dolor crónico'
+                ]
+            },
+            general: {
+                name: 'Problemas Generales',
+                icon: '🏥',
+                problems: [
+                    'dolor muscular', 'lesiones', 'rehabilitación',
+                    'dolor crónico', 'limitación de movimiento', 'malestar general'
                 ]
             },
             deportiva: {
                 name: 'Lesiones Deportivas',
                 icon: '⚽',
                 problems: [
-                    'esguince de tobillo', 'lesión de isquiotibiales', 'contractura gemelar',
-                    'periostitis tibial', 'epicondilitis', 'lesión del LCA',
-                    'pubalgia', 'síndrome compartimento', 'rotura fibrilar',
-                    'sobrecarga muscular'
-                ],
-                treatments: [
-                    'Crioterapia inmediata', 'TENS deportivo', 'Masoterapia deportiva',
-                    'Kinesiotaping', 'Ejercicios excéntricos', 'Pliometría',
-                    'Termoterapia profunda', 'Liberación activa', 'Recuperación funcional'
-                ]
-            },
-            neurologica: {
-                name: 'Rehabilitación Neurológica',
-                icon: '🧠',
-                problems: [
-                    'secuelas de ACV', 'hemiparesia', 'Parkinson', 'esclerosis múltiple',
-                    'neuropatía periférica', 'síndrome del túnel carpiano', 'radiculopatía',
-                    'mielopatía cervical', 'atrofia muscular', 'espasticidad'
-                ],
-                treatments: [
-                    'Facilitación neuromuscular', 'Electroestimulación funcional', 'Concepto Bobath',
-                    'Ejercicios neuromotores', 'Reeducación sensorial', 'Terapia del espejo',
-                    'TENS neurogénico', 'Movilización neural', 'Biofeedback'
+                    'lesiones deportivas', 'esguinces', 'contracturas musculares',
+                    'sobrecargas', 'tendinitis', 'recuperación atlética'
                 ]
             }
         };
 
-        const templates = {
-            educational: [
-                '🌟 ¿Sufres de {problem}?\n\nLa fisioterapia profesional puede ayudarte con:\n{treatments}\n\n💡 Técnicas especializadas disponibles:\n🔹 Masoterapia terapéutica\n🔹 Electroestimulación TENS\n🔹 Termoterapia y Crioterapia\n🔹 Servicio a domicilio\n\n¡No dejes que el dolor limite tu vida!\n\n📞 Lic. Kenia de los Santos Andujar\n📱 WhatsApp: +1 (829) 697-4658\n🏥 Fisioterapeuta Profesional\n⏰ Horarios flexibles • Atención personalizada\n\n¡Tu recuperación es nuestra prioridad! 💚',
-               
-                '💪 ¿Te molesta {problem}?\n\nTenemos la solución profesional:\n{treatments}\n\n🎯 Nuestros servicios incluyen:\n✅ Evaluación completa\n✅ Plan de tratamiento personalizado\n✅ Seguimiento profesional\n✅ Atención domiciliaria\n\n 
+        function generateContentForClients(type) {
+            contentType = type;
+            const category = categories[selectedCategory];
+            const randomProblem = category.problems[Math.floor(Math.random() * category.problems.length)];
+           
+            let content = '';
+           
+            if (type === 'educational') {
+                content = `🌟 ¿Tienes ${randomProblem}?\n\nComo fisioterapeuta profesional, puedo ayudarte con:\n\n✅ Masoterapia especializada\n✅ TENS (alivio eléctrico del dolor)\n✅ Terapias de calor y frío\n✅ Servicio a domicilio disponible\n\n💡 Tratamientos comprobados para tu recuperación.\n\n👇 SI NECESITAS AYUDA, USA ESTOS BOTONES: 👇`;
+            } else if (type === 'promotion') {
+                content = `🎉 OFERTA ESPECIAL 🎉\n\n¿Sufres de ${randomProblem}?\n\n💰 PROMOCIÓN ESTE MES:\n✨ Primera consulta 50% descuento\n🏠 Servicio a domicilio GRATIS\n📋 Evaluación completa incluida\n\n⏰ Solo por tiempo limitado\n\n👇 APROVECHA ESTA OPORTUNIDAD: 👇`;
+            } else {
+                content = `🏥 SERVICIOS DE FISIOTERAPIA 🏥\n\nOfrezco tratamiento profesional para ${randomProblem} y muchos otros problemas.\n\n🎯 Mis servicios:\n• Masoterapia terapéutica\n• TENS (electroestimulación)\n• Terapias de calor y frío\n• Atención en tu casa\n\n📞 Lic. Kenia de los Santos Andujar\n\n👇 CONTACTA FÁCILMENTE: 👇`;
+            }
+           
+            // Agregar botones interactivos que el cliente verá
+            content += `\n\n` + generateClientButtons();
+           
+            generatedContent = content;
+            document.getElementById('contentText').textContent = content;
+            document.getElementById('contentDisplay').classList.remove('hidden');
+            document.getElementById('contentDisplay').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generateClientButtons() {
+            return `━━━━━━━━━━━━━━━━━━━━━━
+⚡ PARA EMERGENCIAS (Dolor Severo):
+WhatsApp: https://wa.me/18296974658?text=🚨%20EMERGENCIA%20-%20Tengo%20dolor%20severo%20y%20necesito%20atención%20urgente.%20Mi%20nombre:%20_____%20Mi%20problema:%20_____%20Mi%20dirección:%20_____
+
+📅 PARA AGENDAR CITA NORMAL:
+WhatsApp: https://wa.me/18296974658?text=📅%20Hola%20Lic.%20Kenia,%20quiero%20agendar%20una%20cita.%20Mi%20nombre:%20_____%20Mi%20problema:%20_____%20Fecha%20que%20me%20conviene:%20_____%20Hora%20preferida:%20_____
+
+👥 PARA REFERIR UN FAMILIAR:
+WhatsApp: https://wa.me/18296974658?text=👥%20Hola%20Lic.%20Kenia,%20quiero%20referir%20a:%20_____%20Su%20teléfono:%20_____%20Su%20problema:%20_____%20Puede%20contactarlo%20de%20mi%20parte.
+━━━━━━━━━━━━━━━━━━━━━━`;
+        }
+
+        function generateAdvancedContent() {
+            generateContentForClients(contentType);
+        }
+
+        function setCategory(category) {
+            selectedCategory = category;
+            document.querySelectorAll('[id^="cat-"]').forEach(btn => {
+                btn.className = btn.className.replace('border-blue-500 bg-blue-50', 'border-gray-200');
+            });
+            const button = document.getElementById(`cat-${category}`);
+            if (button) {
+                button.className = 'p-4 border-2 border-blue-500 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all';
+            }
+        }
+
+        function copyContent() {
+            if (generatedContent) {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(generatedContent).then(() => {
+                        alert('✅ Mensaje copiado. Ahora pégalo en WhatsApp y envíalo a tus clientes.');
+                    });
+                } else {
+                    // Fallback para navegadores más antiguos
+                    const textArea = document.createElement('textarea');
+                    textArea.value = generatedContent;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    alert('✅ Mensaje copiado. Ahora pégalo en WhatsApp y envíalo a tus clientes.');
+                }
+            }
+        }
+
+        function openWhatsAppWeb() {
+            window.open('https://web.whatsapp.com/', '_blank');
+        }
+
+        function generateNew() {
+            generateAdvancedContent();
+        }
+
+        // Generar contenido inicial cuando carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            generateContentForClients('educational');
+        });
+    </script>
+</body>
+</html> 
