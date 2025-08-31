@@ -55,23 +55,29 @@
             <div class="bg-white rounded-lg shadow-xl p-6 mb-8">
                 <h2 class="text-2xl font-bold mb-6 text-center">Selecciona Qué Contenido Crear</h2>
                
-                <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div class="grid md:grid-cols-4 gap-4 mb-6">
                     <button onclick="generateContentForClients('educational')" class="bg-blue-500 hover:bg-blue-600 text-white p-6 rounded-lg text-center transition-all shadow-lg">
                         <i class="fas fa-graduation-cap text-3xl mb-3"></i>
-                        <h3 class="text-xl font-bold mb-2">Contenido Educativo</h3>
-                        <p class="text-sm">Para enseñar sobre problemas y tratamientos</p>
+                        <h3 class="text-lg font-bold mb-2">Contenido Educativo</h3>
+                        <p class="text-sm">Información sobre tratamientos</p>
                     </button>
                    
                     <button onclick="generateContentForClients('promotion')" class="bg-purple-500 hover:bg-purple-600 text-white p-6 rounded-lg text-center transition-all shadow-lg">
                         <i class="fas fa-percentage text-3xl mb-3"></i>
-                        <h3 class="text-xl font-bold mb-2">Ofertas y Promociones</h3>
-                        <p class="text-sm">Para promocionar descuentos especiales</p>
+                        <h3 class="text-lg font-bold mb-2">Ofertas y Promociones</h3>
+                        <p class="text-sm">Descuentos especiales</p>
                     </button>
                    
                     <button onclick="generateContentForClients('service')" class="bg-green-500 hover:bg-green-600 text-white p-6 rounded-lg text-center transition-all shadow-lg">
                         <i class="fas fa-hands-helping text-3xl mb-3"></i>
-                        <h3 class="text-xl font-bold mb-2">Recordatorio de Servicios</h3>
-                        <p class="text-sm">Para recordar qué servicios ofreces</p>
+                        <h3 class="text-lg font-bold mb-2">Recordatorio Servicios</h3>
+                        <p class="text-sm">Qué servicios ofreces</p>
+                    </button>
+
+                    <button onclick="generateBusinessCard()" class="bg-orange-500 hover:bg-orange-600 text-white p-6 rounded-lg text-center transition-all shadow-lg">
+                        <i class="fas fa-id-card text-3xl mb-3"></i>
+                        <h3 class="text-lg font-bold mb-2">Tarjeta Presentación</h3>
+                        <p class="text-sm">Para compartir entre clientes</p>
                     </button>
                 </div>
 
@@ -301,8 +307,63 @@ WhatsApp: https://wa.me/18296974658?text=👥%20Hola%20Lic.%20Kenia,%20quiero%20
 ━━━━━━━━━━━━━━━━━━━━━━`;
         }
 
-        function generateAdvancedContent() {
-            generateContentForClients(contentType);
+        function generateBusinessCard() {
+            contentType = 'businesscard';
+           
+            const cardContent = `💳 TARJETA DE PRESENTACIÓN DIGITAL 💳
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🏥 LIC. KENIA DE LOS SANTOS ANDUJAR
+👩‍⚕️ FISIOTERAPEUTA PROFESIONAL
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 ESPECIALISTA EN:
+🔸 Masoterapia terapéutica
+🔸 TENS (electroestimulación)
+🔸 Termoterapia y crioterapia
+🔸 Rehabilitación profesional
+🔸 Terapia geriátrica
+🔸 Tratamiento de lesiones
+
+🏠 SERVICIO A DOMICILIO DISPONIBLE
+⚡ ATENCIÓN DE EMERGENCIAS 24/7
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📱 CONTACTO DIRECTO:
+WhatsApp: +1 (829) 697-4658
+
+⏰ Horarios flexibles
+🎯 Atención personalizada
+✅ Resultados comprobados
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👇 CONTACTA DIRECTAMENTE: 👇
+
+🚨 EMERGENCIA (Dolor Severo):
+https://wa.me/18296974658?text=🚨%20EMERGENCIA%20-%20Necesito%20atención%20urgente%20por%20dolor%20severo.%20Mi%20nombre:%20_____%20Mi%20dirección:%20_____%20Mi%20problema:%20_____
+
+📅 AGENDAR CITA:
+https://wa.me/18296974658?text=📅%20Solicito%20cita.%20Mi%20nombre:%20_____%20Mi%20problema:%20_____%20Fecha%20preferida:%20_____%20Horario:%20_____
+
+👥 REFERIR FAMILIAR/AMIGO:
+https://wa.me/18296974658?text=👥%20Quiero%20referir%20a:%20_____%20Su%20teléfono:%20_____%20Su%20problema:%20_____
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💚 ¡COMPARTE ESTA TARJETA CON QUIEN NECESITE AYUDA! 💚
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+
+            generatedContent = cardContent;
+            document.getElementById('contentText').textContent = cardContent;
+            document.getElementById('contentDisplay').classList.remove('hidden');
+           
+            // Generate business card image
+            generateBusinessCardImage();
+           
+            document.getElementById('contentDisplay').scrollIntoView({ behavior: 'smooth' });
         }
 
         function setCategory(category) {
@@ -339,8 +400,105 @@ WhatsApp: https://wa.me/18296974658?text=👥%20Hola%20Lic.%20Kenia,%20quiero%20
             window.open('https://web.whatsapp.com/', '_blank');
         }
 
+        function generateBusinessCardImage() {
+            const canvas = document.getElementById('marketingCanvas');
+            const ctx = canvas.getContext('2d');
+           
+            canvas.width = 800;
+            canvas.height = 600;
+           
+            // Background gradient for business card
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#1e3a8a');
+            gradient.addColorStop(0.5, '#3b82f6');
+            gradient.addColorStop(1, '#1e40af');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+           
+            // White content area
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.beginPath();
+            if (ctx.roundRect) {
+                ctx.roundRect(40, 40, canvas.width - 80, canvas.height - 80, 15);
+            } else {
+                ctx.rect(40, 40, canvas.width - 80, canvas.height - 80);
+            }
+            ctx.fill();
+           
+            // Header section
+            ctx.fillStyle = '#1e3a8a';
+            ctx.font = 'bold 28px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('LIC. KENIA DE LOS SANTOS ANDUJAR', canvas.width / 2, 100);
+           
+            ctx.font = 'bold 20px Arial';
+            ctx.fillStyle = '#3b82f6';
+            ctx.fillText('FISIOTERAPEUTA PROFESIONAL', canvas.width / 2, 125);
+           
+            // Services section
+            ctx.fillStyle = '#1f2937';
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText('SERVICIOS ESPECIALIZADOS:', canvas.width / 2, 170);
+           
+            const services = [
+                '• Masoterapia Terapéutica',
+                '• TENS (Electroestimulación)',
+                '• Termoterapia y Crioterapia',
+                '• Rehabilitación Profesional',
+                '• Atención Geriátrica',
+                '• Servicio a Domicilio'
+            ];
+           
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'left';
+            const leftColumn = services.slice(0, 3);
+            const rightColumn = services.slice(3, 6);
+           
+            leftColumn.forEach((service, index) => {
+                ctx.fillText(service, 80, 200 + (index * 25));
+            });
+           
+            rightColumn.forEach((service, index) => {
+                ctx.fillText(service, 420, 200 + (index * 25));
+            });
+           
+            // Contact section
+            ctx.fillStyle = '#dc2626';
+            ctx.font = 'bold 22px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('📱 CONTACTO DIRECTO', canvas.width / 2, 320);
+           
+            ctx.font = 'bold 24px Arial';
+            ctx.fillStyle = '#1e3a8a';
+            ctx.fillText('WhatsApp: +1 (829) 697-4658', canvas.width / 2, 350);
+           
+            // Emergency highlight
+            ctx.fillStyle = '#dc2626';
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText('🚨 EMERGENCIAS 24/7 DISPONIBLES 🚨', canvas.width / 2, 390);
+           
+            // Sharing message
+            ctx.fillStyle = '#059669';
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('💚 COMPARTE ESTA TARJETA 💚', canvas.width / 2, 440);
+           
+            ctx.fillStyle = '#374151';
+            ctx.font = '16px Arial';
+            ctx.fillText('Ayuda a tus familiares y amigos a encontrar', canvas.width / 2, 465);
+            ctx.fillText('atención fisioterapéutica profesional', canvas.width / 2, 485);
+           
+            // Bottom section
+            ctx.fillStyle = '#6b7280';
+            ctx.font = '14px Arial';
+            ctx.fillText('Horarios Flexibles • Atención Personalizada • Resultados Comprobados', canvas.width / 2, 520);
+        }
+
         function generateNew() {
             generateAdvancedContent();
+        }
+
+        function generateAdvancedContent() {
+            generateContentForClients(contentType);
         }
 
         // Generar contenido inicial cuando carga la página
