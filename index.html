@@ -441,4 +441,159 @@
                 gradient.addColorStop(0, '#8b5cf6');
                 gradient.addColorStop(1, '#6366f1');
             } else if (type === 'card') {
-                gradient.addColorStop(0, 
+                gradient.addColorStop(0, '#f59e0b');
+                gradient.addColorStop(1, '#d97706');
+            } else if (type === 'testimonial') {
+                gradient.addColorStop(0, '#10b981');
+                gradient.addColorStop(1, '#059669');
+            } else {
+                gradient.addColorStop(0, '#3b82f6');
+                gradient.addColorStop(1, '#1d4ed8');
+            }
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+           
+            // Área de contenido blanca
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.beginPath();
+            if (ctx.roundRect) {
+                ctx.roundRect(40, 40, canvas.width - 80, canvas.height - 80, 15);
+            } else {
+                ctx.rect(40, 40, canvas.width - 80, canvas.height - 80);
+            }
+            ctx.fill();
+           
+            // Encabezado
+            ctx.fillStyle = '#1e293b';
+            ctx.font = 'bold 28px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('LIC. KENIA DE LOS SANTOS ANDUJAR', canvas.width / 2, 100);
+           
+            ctx.font = 'bold 20px Arial';
+            ctx.fillStyle = '#475569';
+            ctx.fillText('FISIOTERAPEUTA PROFESIONAL', canvas.width / 2, 125);
+           
+            // Ícono del problema
+            ctx.font = '60px Arial';
+            ctx.fillText(problemData.icon, canvas.width / 2, 180);
+           
+            // Título del problema
+            ctx.fillStyle = '#dc2626';
+            ctx.font = 'bold 24px Arial';
+            const titleText = type === 'offer' ? `OFERTA ESPECIAL` :
+                             type === 'card' ? `TARJETA DE PRESENTACIÓN` :
+                             type === 'testimonial' ? `TESTIMONIO DE ÉXITO` :
+                             `¿Tienes ${problem}?`;
+           
+            wrapText(ctx, titleText, canvas.width / 2, 230, 680, 30);
+           
+            // Servicios
+            ctx.fillStyle = '#1e293b';
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('SERVICIOS ESPECIALIZADOS:', canvas.width / 2, 320);
+           
+            const services = [
+                '✓ Masoterapia Terapéutica',
+                '✓ TENS (Electroestimulación)',
+                '✓ Termoterapia y Crioterapia',
+                '✓ Servicio a Domicilio'
+            ];
+           
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'left';
+            services.forEach((service, index) => {
+                ctx.fillText(service, 80, 350 + (index * 25));
+            });
+           
+            // Información de contacto
+            ctx.fillStyle = '#dc2626';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('📱 CONTACTO DIRECTO', canvas.width / 2, 470);
+           
+            ctx.font = 'bold 26px Arial';
+            ctx.fillStyle = '#1e293b';
+            ctx.fillText('WhatsApp: +1 (829) 697-4658', canvas.width / 2, 500);
+           
+            // Mensaje especial según tipo
+            ctx.fillStyle = type === 'offer' ? '#dc2626' : '#10b981';
+            ctx.font = 'bold 18px Arial';
+            if (type === 'offer') {
+                ctx.fillText('🎉 OFERTA POR TIEMPO LIMITADO 🎉', canvas.width / 2, 540);
+            } else if (type === 'card') {
+                ctx.fillText('💚 COMPARTE ESTA TARJETA CON QUIEN NECESITE 💚', canvas.width / 2, 540);
+            } else {
+                ctx.fillText('¡Tu recuperación es nuestra prioridad!', canvas.width / 2, 540);
+            }
+        }
+       
+        function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(' ');
+            let line = '';
+            let currentY = y;
+           
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+               
+                if (testWidth > maxWidth && n > 0) {
+                    ctx.fillText(line, x, currentY);
+                    line = words[n] + ' ';
+                    currentY += lineHeight;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, x, currentY);
+        }
+
+        function downloadTemplate() {
+            const canvas = document.getElementById('templateCanvas');
+            const link = document.createElement('a');
+            link.download = `fisioterapia-kenia-${messageType}-${selectedProblem}-${Date.now()}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function copyMessage() {
+            if (currentMessage) {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(currentMessage).then(() => {
+                        alert('✅ Mensaje copiado. Ahora ábrelo en WhatsApp y envíalo a tus clientes.');
+                    });
+                } else {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = currentMessage;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    alert('✅ Mensaje copiado. Ahora ábrelo en WhatsApp y envíalo a tus clientes.');
+                }
+            }
+        }
+
+        function sendToWhatsApp() {
+            const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(currentMessage)}`;
+            window.location.href = whatsappUrl;
+           
+            setTimeout(() => {
+                copyMessage();
+            }, 1000);
+        }
+
+        function generateAnother() {
+            generateMessage();
+        }
+
+        // Inicializar sistema
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generar contenido inicial
+            setTimeout(() => {
+                generateMessage();
+            }, 500);
+        });
+    </script>
+</body>
+</html> 
