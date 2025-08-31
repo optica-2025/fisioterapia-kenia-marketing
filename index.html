@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lic. Kenia de los Santos Andujar - Fisioterapia Profesional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .emergency-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <div class="gradient-bg text-white py-6">
+            <div class="max-w-6xl mx-auto px-4 text-center">
+                <h1 class="text-4xl font-bold mb-2">Lic. Kenia de los Santos Andujar</h1>
+                <p class="text-xl">Fisioterapeuta Profesional</p>
+                <p class="text-lg opacity-90">Servicios Especializados • Atención Domiciliaria • Tratamientos de Emergencia</p>
+                <div class="mt-4 flex justify-center space-x-4">
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fas fa-phone mr-2"></i>+1 (829) 697-4658
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Button -->
+        <div class="max-w-6xl mx-auto px-4 -mt-4 mb-6">
+            <div class="bg-red-500 text-white rounded-lg p-4 text-center emergency-pulse shadow-2xl">
+                <button onclick="emergencyCall()" class="w-full">
+                    <i class="fas fa-exclamation-triangle text-2xl mr-3"></i>
+                    <span class="text-xl font-bold">LLAMADA DE EMERGENCIA - DOLOR SEVERO</span>
+                    <i class="fas fa-exclamation-triangle text-2xl ml-3"></i>
+                    <p class="text-sm mt-2">¿No puedes soportar el dolor? Contacto inmediato para atención urgente</p>
+                </button>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4">
+            <!-- Quick Actions -->
+            <div class="grid md:grid-cols-3 gap-4 mb-8">
+                <button onclick="scheduleAppointment()" class="bg-green-500 hover:bg-green-600 text-white p-6 rounded-lg text-center transition-all shadow-lg">
+                    <i class="fas fa-calendar-plus text-3xl mb-3"></i>
+                    <h3 class="text-xl font-bold">Agendar Cita</h3>
+                    <p class="text-sm">Programa tu consulta</p>
+                </button>
+                <button onclick="homeService()" class="bg-blue-500 hover:bg-blue-600 text-white p-6 rounded-lg text-center transition-all shadow-lg">
+                    <i class="fas fa-home text-3xl mb-3"></i>
+                    <h3 class="text-xl font-bold">Servicio a Domicilio</h3>
+                    <p class="text-sm">Tratamiento en tu hogar</p>
+                </button>
+                <button onclick="consultInfo()" class="bg-purple-500 hover:bg-purple-600 text-white p-6 rounded-lg text-center transition-all shadow-lg">
+                    <i class="fas fa-info-circle text-3xl mb-3"></i>
+                    <h3 class="text-xl font-bold">Consulta Informativa</h3>
+                    <p class="text-sm">Pregunta sobre tratamientos</p>
+                </button>
+            </div>
+
+            <!-- Marketing Generator -->
+            <div class="bg-white rounded-lg shadow-xl p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-center">Generador de Contenido de Marketing</h2>
+                
+                <!-- Category Selection -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-4">Selecciona Área de Tratamiento:</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3" id="categoryGrid">
+                        <!-- Categories will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Template Type Selection -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-4">Tipo de Contenido:</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <button onclick="setTemplateType('educational')" id="btn-educational" class="p-3 border-2 rounded-lg hover:bg-blue-50 transition-all">
+                            <i class="fas fa-book text-blue-500 mb-2"></i>
+                            <div class="font-medium">Educativo</div>
+                        </button>
+                        <button onclick="setTemplateType('testimonial')" id="btn-testimonial" class="p-3 border-2 rounded-lg hover:bg-green-50 transition-all">
+                            <i class="fas fa-star text-green-500 mb-2"></i>
+                            <div class="font-medium">Testimonial</div>
+                        </button>
+                        <button onclick="setTemplateType('emergency')" id="btn-emergency" class="p-3 border-2 rounded-lg hover:bg-red-50 transition-all">
+                            <i class="fas fa-exclamation text-red-500 mb-2"></i>
+                            <div class="font-medium">Urgencia</div>
+                        </button>
+                        <button onclick="setTemplateType('prevention')" id="btn-prevention" class="p-3 border-2 rounded-lg hover:bg-yellow-50 transition-all">
+                            <i class="fas fa-shield text-yellow-500 mb-2"></i>
+                            <div class="font-medium">Prevención</div>
+                        </button>
+                        <button onclick="setTemplateType('promotion')" id="btn-promotion" class="p-3 border-2 rounded-lg hover:bg-purple-50 transition-all">
+                            <i class="fas fa-percentage text-purple-500 mb-2"></i>
+                            <div class="font-medium">Promoción</div>
+                        </button>
+                        <button onclick="setTemplateType('service')" id="btn-service" class="p-3 border-2 rounded-lg hover:bg-indigo-50 transition-all">
+                            <i class="fas fa-cogs text-indigo-500 mb-2"></i>
+                            <div class="font-medium">Servicios</div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="generateContent()" id="generateBtn" class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 px-8 rounded-lg font-bold text-lg hover:from-indigo-700 hover:to-purple-700 transition-all">
+                        <i class="fas fa-magic mr-2"></i>Generar Contenido de Marketing
+                    </button>
+                </div>
+            </div>
+
+            <!-- Generated Content Display -->
+            <div id="contentDisplay" class="hidden bg-white rounded-lg shadow-xl p-6 mb-8">
+                <h3 class="text-xl font-bold mb-4">Contenido Generado:</h3>
+                <div id="contentText" class="bg-gray-50 p-4 rounded-lg mb-4"></div>
+                <div class="flex space-x-3">
+                    <button onclick="shareWhatsApp()" class="flex-1 bg-green-500 text-white py-3 px-4 rounded-lg hover:bg-green-600 transition-all">
+                        <i class="fab fa-whatsapp mr-2"></i>Compartir en WhatsApp
+                    </button>
+                    <button onclick="copyContent()" class="flex-1 bg-blue-500 text-white py-3 px-4 rounded-lg hover:bg-blue-600 transition-all">
+                        <i class="fas fa-copy mr-2"></i>Copiar Texto
+                    </button>
+                    <button onclick="downloadImage()" class="flex-1 bg-purple-500 text-white py-3 px-4 rounded-lg hover:bg-purple-600 transition-all">
+                        <i class="fas fa-download mr-2"></i>Descargar Imagen
+                    </button>
+                </div>
+            </div>
+
+            <!-- Canvas for Image Generation -->
+            <div class="bg-white rounded-lg shadow-xl p-6 mb-8">
+                <h3 class="text-xl font-bold mb-4 text-center">Vista Previa del Post</h3>
+                <div class="flex justify-center">
+                    <canvas id="marketingCanvas" class="border border-gray-300 rounded-lg shadow-lg" style="max-width: 100%; max-height: 600px;"></canvas>
+                </div>
+            </div>
+
+            <!-- Services Information -->
+            <div class="bg-white rounded-lg shadow-xl p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-center">Servicios Profesionales Especializados</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <i class="fas fa-hands text-4xl text-blue-600 mb-3"></i>
+                        <h3 class="font-bold">Masoterapia</h3>
+                        <p class="text-sm text-gray-600">Especializada y terapéutica</p>
+                    </div>
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <i class="fas fa-bolt text-4xl text-green-600 mb-3"></i>
+                        <h3 class="font-bold">Electroterapia TENS</h3>
+                        <p class="text-sm text-gray-600">Alivio inmediato del dolor</p>
+                    </div>
+                    <div class="text-center p-4 bg-red-50 rounded-lg">
+                        <i class="fas fa-thermometer-hot text-4xl text-red-600 mb-3"></i>
+                        <h3 class="font-bold">Termoterapia</h3>
+                        <p class="text-sm text-gray-600">Calor terapéutico</p>
+                    </div>
+                    <div class="text-center p-4 bg-cyan-50 rounded-lg">
+                        <i class="fas fa-snowflake text-4xl text-cyan-600 mb-3"></i>
+                        <h3 class="font-bold">Crioterapia</h3>
+                        <p class="text-sm text-gray-600">Terapia de frío</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
+                    <h3 class="font-bold text-lg mb-3">Técnicas Especializadas Adicionales:</h3>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div>• Drenaje Linfático Manual</div>
+                        <div>• Liberación Miofascial</div>
+                        <div>• Terapia Manual Articular</div>
+                        <div>• Rehabilitación Post-quirúrgica</div>
+                        <div>• Terapia Geriátrica Especializada</div>
+                        <div>• Tratamientos Deportivos</div>
+                        <div>• Manejo de Fibromialgia</div>
+                        <div>• Terapia para Artritis</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedCategory = 'espalda';
+        let selectedTemplateType = 'educational';
+        let generatedContent = '';
+
+        // Comprehensive categories with 200+ content variations
+        const categories = {
+            espalda: {
+                name: 'Dolor de Espalda',
+                icon: '🏃‍♂️',
+                problems: [
+                    'Dolor lumbar crónico', 'Contracturas cervicales', 'Escoliosis postural', 
+                    'Hernia discal', 'Dolor entre omóplatos', 'Lumbago agudo',
+                    'Ciática', 'Espondilosis', 'Lordosis cervical', 'Cifosis dorsal'
+                ],
+                treatments: [
+                    'Masoterapia descontracturante', 'TENS para alivio inmediato', 'Termoterapia profunda',
+                    'Liberación miofascial', 'Terapia manual vertebral', 'Ejercicios de Williams',
+                    'Estabilización core', 'Tracción cervical', 'Movilizaciones articulares'
+                ]
+            },
+            cuello: {
+                name: 'Dolor de Cuello',
+                icon: '🦒',
+                problems: [
+                    'Tortícolis aguda', 'Síndrome cervical', 'Whiplash', 'Contractura trapecio',
+                    'Cefaleas tensionales', 'Síndrome del escaleno', 'Rectificación cervical',
+                    'Neuralgia occipital', 'Esguince cervical', 'Síndrome facetario'
+                ],
+                treatments: [
+                    'Terapia manual cervical', 'TENS cervical', 'Liberación de trigger points',
+                    'Movilizaciones suaves', 'Termoterapia localizada', 'Ejercicios McKenzie',
+                    'Estiramiento miofascial', 'Tracción manual', 'Relajación muscular'
+                ]
+            },
+            rodilla: {
+                name: 'Dolor de Rodilla',
+                icon: '🦵',
+                problems: [
+                    'Síndrome patelofemoral', 'Condromalacia', 'Lesión menisco',
+                    'Artritis de rodilla', 'Tendinitis rotuliana', 'Bursitis',
+                    'Síndrome cintilla iliotibial', 'Inestabilidad articular', 'Artrosis',
+                    'Lesión ligamentaria'
+                ],
+                treatments: [
+                    'Fortalecimiento cuádriceps', 'Crioterapia post-ejercicio', 'TENS analgésico',
+                    'Drenaje linfático', 'Movilización patelar', 'Ejercicios propioceptivos',
+                    'Termoterapia pre-ejercicio', 'Liberación fascial', 'Vendaje funcional'
+                ]
+            },
+            hombro: {
+                name: 'Dolor de Hombro',
+                icon: '💪',
+                problems: [
+                    'Síndrome manguito rotador', 'Hombro congelado', 'Bursitis subacromial',
+                    'Tendinitis bíceps', 'Capsulitis adhesiva', 'Pinzamiento subacromial',
+                    'Luxación recidivante', 'Tendinosis supraespinoso', 'Síndrome outlet',
+                    'Artritis glenohumeral'
+                ],
+                treatments: [
+                    'Péndulos de Codman', 'Movilizaciones capsulares', 'TENS shoulder',
+                    'Termoterapia húmeda', 'Liberación cicatricial', 'Ejercicios Kabat',
+                    'Fortalecimiento excéntrico', 'Drenaje postural', 'Crioterapia selectiva'
+                ]
+            },
+            pies: {
+                name: 'Dolor de Pies',
+                icon: '🦶',
+                problems: [
+                    'Fascitis plantar', 'Espolón calcáneo', 'Metatarsalgia',
+                    'Neuroma de Morton', 'Pie plano', 'Pie cavo', 'Hallux valgus',
+                    'Tendinitis aquílea', 'Síndrome túnel tarsiano', 'Sesamoiditis'
+                ],
+                treatments: [
+                    'Masoterapia plantar', 'TENS para fascitis', 'Crioterapia localizada',
+                    'Liberación fascial profunda', 'Ejercicios intrínsecos', 'Ondas de choque',
+                    'Termoterapia de contraste', 'Movilizaciones articulares', 'Vendaje neuromuscular'
+                ]
+            },
+            geriatrica: {
+                name: 'Terapia Geriátrica',
+                icon: '👴',
+                problems: [
+                    'Artritis generalizada', 'Osteoporosis', 'Sarcopenia', 'Fragilidad',
+                    'Pérdida de equilibrio', 'Rigidez articular', 'Dolor crónico',
+                    'Limitación funcional', 'Deterioro postural', 'Claudicación'
+                ],
+                treatments: [
+                    'Ejercicios de equilibrio', 'Fortalecimiento suave', 'Movilidad articular',
+                    'TENS geriátrico', 'Termoterapia adaptada', 'Marcha terapéutica',
+                    'Prevención caídas', 'Activación muscular', 'Hidroterapia'
+                ]
+            },
+            deportiva: {
+                name: 'Lesiones Deportivas',
+                icon: '⚽',
+                problems: [
+                    'Esguince tobillo', 'Lesión isquiotibiales', 'Contractura gemelar',
+                    'Periostitis tibial', 'Epicondilitis', 'Lesión LCA',
+                    'Pubalgia', 'Síndrome compartimento', 'Rotura fibrilar',
+                    'Sobrecarga muscular'
+                ],
+                treatments: [
+                    'Crioterapia inmediata', 'TENS deportivo', 'Masoterapia deportiva',
+                    'Kinesiotaping', 'Ejercicios excéntricos', 'Pliometría',
+                    'Termoterapia profunda', 'Liberación activa', 'Recuperación funcional'
+                ]
+            },
+            neurologica: {
+                name: 'Rehabilitación Neurológica',
+                icon: '🧠',
+                problems: [
+                    'ACV secuelas', 'Hemiparesia', 'Parkinson', 'Esclerosis múltiple',
+                    'Neuropatía periférica', 'Síndrome túnel carpiano', 'Radiculopatía',
+                    'Mielopatía cervical', 'Atrofia muscular', 'Espasticidad'
+                ],
+                treatments: [
+                    'Facilitación neuromuscular', 'Electroestimulación funcional', 'Bobath',
+                    'Ejercicios neuromotores', 'Reeducación sensorial', 'Terapia del espejo',
+                    'TENS neurogénico', 'Movilización neural', 'Biofeedback'
+                ]
+            }
+        };
+
+        const templateTypes = {
+            educational: {
+                intros: [
+                    "¿Sabías que...", "Es importante conocer que...", "La fisioterapia puede ayudarte con...",
+                    "Muchas personas no saben que...", "Un dato importante sobre..."
+                ],
+                endings: [
+                    "¡No dejes que el dolor limite tu vida!", "Tu bienestar es nuestra prioridad",
+                    "Recupera tu calidad de vida", "¡Agenda tu consulta hoy!"
+                ]
+            },
+            testimonial: {
+                stories: [
+                    "Una paciente de 65 años llegó con dolor crónico...",
+                    "Después de 5 sesiones de tratamiento...",
+                    "Gracias a la combinación de TENS y masoterapia..."
+                ]
+            },
+            emergency: {
+                urgency: [
+                    "¿El dolor no te deja dormir?", "¿No puedes moverte con normalidad?",
+                    "¿Necesitas alivio inmediato?", "¿El dolor es insoportable?"
+                ]
+            },
+            prevention: {
+                tips: [
+                    "Prevenir es mejor que curar", "Pequeños cambios, grandes resultados",
+                    "Cuida tu cuerpo antes de que sea tarde"
+                ]
+            },
+            promotion: {
+                offers: [
+                    "Consulta de evaluación gratuita", "Descuento en primera sesión",
+                    "Paquete de 5 sesiones con descuento"
+                ]
+            },
+            service: {
+                services: [
+                    "Servicio a domicilio disponible", "Horarios flexibles",
+                    "Atención personalizada", "Equipos especializados"
+                ]
+            }
+        };
+
+        function initializeCategories() {
+            const grid = document.getElementById('categoryGrid');
+            Object.entries(categories).forEach(([key, category]) => {
+                const button = document.createElement('button');
+                button.onclick = () => setCategory(key);
+                button.id = `cat-${key}`;
+                button.className = `p-4 border-2 rounded-lg hover:bg-blue-50 transition-all ${key === selectedCategory ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`;
+                button.innerHTML = `
+                    <div class="text-2xl mb-2">${category.icon}</div>
+                    <div class="font-medium text-sm">${category.name}</div>
+                `;
+                grid.appendChild(button);
+            });
+        }
+
+        function setCategory(category) {
+            selectedCategory = category;
+            document.querySelectorAll('[id^="cat-"]').forEach(btn => {
+                btn.className = btn.className.replace('border-blue-500 bg-blue-50', 'border-gray-200');
+            });
+            document.getElementById(`cat-${category}`).className = 'p-4 border-2 rounded-lg hover:bg-blue-50 transition-all border-blue-500 bg-blue-50';
+        }
+
+        function setTemplateType(type) {
+            selectedTemplateType = type;
+            document.querySelectorAll('[id^="btn-"]').forEach(btn => {
+                btn.className = btn.className.replace('border-blue-500 bg-blue-50', 'border-gray-200');
+            });
+            document.getElementById(`btn-${type}`).className = 'p-3 border-2 rounded-lg hover:bg-blue-50 transition-all border-blue-500 bg-blue-50';
+        }
+
+        function generateContent() {
+            const category = categories[selectedCategory];
+            const randomProblem = category.problems[Math.floor(Math.random() * category.problems.length)];
+            const randomTreatments = category.treatments.slice(0, 3);
+            
+            let content = '';
+            
+            switch(selectedTemplateType) {
+                case 'educational':
+                    content = `🌟 ¿Sufres de ${randomProblem.toLowerCase()}?\n\n`;
+                    content += `La fisioterapia profesional puede ayudarte con:\n`;
+                    randomTreatments.forEach(treatment => {
+                        content += `✓ ${treatment}\n`;
+                    });
+                    content += `\n💪 Tratamientos especializados disponibles:\n`;
+                    content += `🔹 Masoterapia terapéutica\n🔹 Electroestimulación TENS\n🔹 Termoterapia y Crioterapia\n🔹 Servicio a domicilio\n\n`;
+                    break;
+                    
+                case 'emergency':
+                    content = `🚨 ATENCIÓN DE EMERGENCIA 🚨\n\n`;
+                    content += `¿Sufres de dolor severo por ${randomProblem.toLowerCase()}?\n`;
+                    content += `¿No puedes soportar el dolor?\n\n`;
+                    content += `🏥 SERVICIO DE EMERGENCIA DISPONIBLE\n`;
+                    content += `📱 Contacto inmediato para atención urgente\n`;
+                    content += `🏠 Atención domiciliaria de emergencia\n\n`;
+                    break;
+                    
+                case 'promotion':
+                    content = `🎉 OFERTA ESPECIAL 🎉\n\n`;
+                    content += `Tratamiento para ${category.name.toLowerCase()}\n`;
+                    content += `✨ Consulta de evaluación GRATUITA\n`;
+                    content += `💸 Descuento especial en primera sesión\n`;
+                    content += `🏠 Servicio a domicilio sin costo adicional\n\n`;
+                    break;
+                    
+                default:
+                    content = generateEducationalContent(category, randomProblem, randomTreatments);
+            }
+            
+            content += `📞 Lic. Kenia de los Santos Andujar\n`;
+            content += `📱 WhatsApp: +1 (829) 697-4658\n`;
+            content += `🏥 Fisioterapeuta Profesional\n`;
+            content += `⏰ Horarios flexibles • Atención personalizada\n\n`;
+            content += `¡Tu recuperación es nuestra prioridad! 💚`;
+            
+            generatedContent = content;
+            document.getElementById('contentText').innerHTML = content.replace(/\n/g, '<br>');
+            document.getElementById('contentDisplay').classList.remove('hidden');
+            
+            generateMarketingImage(content, category);
+        }
+
+        function generateEducationalContent(category, problem, treatments) {
+            const intros = templateTypes.educational.intros;
+            const endings = templateTypes.educational.endings;
+            
+            let content = `${intros[Math.floor(Math.random() * intros.length)]} ${problem.toLowerCase()}?\n\n`;
+            content += `💡 La fisioterapia especializada incluye:\n`;
+            treatments.forEach(treatment => {
+                content += `✅ ${treatment}\n`;
+            });
+            content += `\n🎯 Servicios disponibles:\n`;
+            content += `🔸 TENS (Electroestimulación)\n🔸 Termoterapia profesional\n🔸 Masoterapia especializada\n🔸 Atención domiciliaria\n\n`;
+            content += `${endings[Math.floor(Math.random() * endings.length)]}\n\n`;
+            return content;
+        }
+
+        function generateMarketingImage(content, category) {
+            const canvas = document.getElementById('marketingCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = 800;
+            canvas.height = 1000;
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // White content area
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.beginPath();
+            ctx.roundRect(40, 60, canvas.width - 80, canvas.height - 120, 20);
+            ctx.fill();
+            
+            // Header
+            ctx.fillStyle = '#2d3748';
+            ctx.font = 'bold 26px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('LIC. KENIA DE LOS SANTOS ANDUJAR', canvas.width / 2, 120);
+            
+            ctx.font = 'bold 18px Arial';
+            ctx.fillStyle = '#4a5568';
+            ctx.fillText('FISIOTERAPEUTA PROFESIONAL', canvas.width / 2, 145);
+            
+            // Category icon
+            ctx.font = '50px Arial';
+            ctx.fillText(category.icon, canvas.width / 2, 200);
+            
+            // Main title from content
+            ctx.fillStyle = '#e53e3e';
+            ctx.font = 'bold 24px Arial';
+            const titleMatch = content.match(/🌟 (.+?)\?/) || content.match(/🚨 (.+?) 🚨/) || ['', 'Tratamiento Profesional'];
+            const title = titleMatch[1] || 'Fisioterapia Especializada';
+            wrapText(ctx, title, canvas.width / 2, 260, 700, 30);
+            
+            // Services section
+            ctx.fillStyle = '#2d3748';
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('SERVICIOS ESPECIALIZADOS:', canvas.width / 2, 350);
+            
+            ctx.font = '16px Arial';
+            ctx.fillStyle = '#4a5568';
+            ctx.textAlign = 'left';
+            const services = [
+                '✓ Masoterapia Terapéutica Especializada',
+                '✓ Electroestimulación TENS para Dolor',
+                '✓ Termoterapia y Crioterapia Profesional',
+                '✓ Servicio a Domicilio Disponible'
+            ];
+            
+            services.forEach((service, index) => {
+                ctx.fillText(service, 80, 380 + (index * 25));
+            });
+            
+            // Emergency section
+            if (selectedTemplateType === 'emergency') {
+                ctx.fillStyle = '#e53e3e';
+                ctx.font = 'bold 22px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('🚨 ATENCIÓN DE EMERGENCIA 🚨', canvas.width / 2, 520);
+                ctx.fillText('Dolor severo - Contacto inmediato', canvas.width / 2, 550);
+            } else {
+                // Regular treatment info
+                ctx.fillStyle = '#805ad5';
+                ctx.font = 'bold 18px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('TÉCNICAS AVANZADAS DISPONIBLES:', canvas.width / 2, 520);
+                
+                ctx.fillStyle = '#4a5568';
+                ctx.font = '16px Arial';
+                ctx.fillText('Drenaje Linfático • Liberación Miofascial • Terapia Manual', canvas.width / 2, 545);
+            }
+            
+            // Contact section
+            ctx.fillStyle = '#2d3748';
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText('📱 CONTACTO DIRECTO', canvas.width / 2, 620);
+            
+            ctx.font = 'bold 26px Arial';
+            ctx.fillStyle = '#e53e3e';
+            ctx.fillText('WhatsApp: +1 (829) 697-4658', canvas.width / 2, 650);
+            
+            // Service highlights
+            ctx.fillStyle = '#38a169';
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText('🏠 Servicio Domiciliario • ⏰ Horarios Flexibles', canvas.width / 2, 700);
+            
+            // Call to action
+            ctx.fillStyle = '#2d3748';
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('¡Tu Recuperación es Nuestra Prioridad!', canvas.width / 2, 740);
+            
+            // Professional footer
+            ctx.fillStyle = '#4a5568';
+            ctx.font = '14px Arial';
+            ctx.fillText('Consultas Profesionales • Evaluación Personalizada • Tratamientos Especializados', canvas.width / 2, 780);
+            
+            if (selectedTemplateType === 'promotion') {
+                ctx.fillStyle = '#f56565';
+                ctx.font = 'bold 18px Arial';
+                ctx.fillText('🎉 CONSULTA DE EVALUACIÓN GRATUITA 🎉', canvas.width / 2, 820);
+            } else if (selectedTemplateType === 'emergency') {
+                ctx.fillStyle = '#f56565';
+                ctx.font = 'bold 18px Arial';
+                ctx.fillText('🚨 DISPONIBLE PARA EMERGENCIAS 24/7 🚨', canvas.width / 2, 820);
+            } else {
+                ctx.fillStyle = '#38a169';
+                ctx.font = 'bold 16px Arial';
+                ctx.fillText('Agenda tu cita hoy • Resultados comprobados', canvas.width / 2, 820);
+            }
+        }
+        }
+        
+        function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(' ');
+            let line = '';
+            let currentY = y;
+            
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+                
+                if (testWidth > maxWidth && n > 0) {
+                    ctx.fillText(line, x, currentY);
+                    line = words[n] + ' ';
+                    currentY += lineHeight;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, x, currentY);
+        }
+
+        function emergencyCall() {
+            const message = encodeURIComponent(
+                '🚨 LLAMADA DE EMERGENCIA 🚨\n\n' +
+                'Necesito atención URGENTE por dolor severo que no puedo soportar.\n\n' +
+                '⚠️ Requiero tratamiento inmediato\n' +
+                '📍 Solicito servicio a domicilio de emergencia\n' +
+                '⏰ Disponible ahora para atención\n\n' +
+                'Por favor contactarme lo antes posible.'
+            );
+            window.open(`https://wa.me/18296974658?text=${message}`, '_blank');
+        }
+
+        function scheduleAppointment() {
+            const message = encodeURIComponent(
+                '📅 SOLICITUD DE CITA\n\n' +
+                'Hola Lic. Kenia, me gustaría agendar una cita para:\n\n' +
+                '👤 Nombre: _____________\n' +
+                '📝 Problema: _____________\n' +
+                '📅 Fecha preferida: _____________\n' +
+                '⏰ Horario preferido: _____________\n' +
+                '📍 Ubicación: _____________\n\n' +
+                '¿Qué disponibilidad tiene?\n' +
+                'Gracias.'
+            );
+            window.open(`https://wa.me/18296974658?text=${message}`, '_blank');
+        }
+
+        function homeService() {
+            const message = encodeURIComponent(
+                '🏠 SERVICIO A DOMICILIO\n\n' +
+                'Solicito información sobre atención fisioterapéutica en mi hogar:\n\n' +
+                '📍 Dirección: _____________\n' +
+                '👤 Paciente: _____________\n' +
+                '🩺 Condición: _____________\n' +
+                '📅 Disponibilidad: _____________\n\n' +
+                '¿Cuáles son los costos y disponibilidad para servicio domiciliario?\n' +
+                'Gracias.'
+            );
+            window.open(`https://wa.me/18296974658?text=${message}`, '_blank');
+        }
+
+        function consultInfo() {
+            const message = encodeURIComponent(
+                '💬 CONSULTA INFORMATIVA\n\n' +
+                'Hola Lic. Kenia, necesito información sobre:\n\n' +
+                '❓ Tratamiento para: _____________\n' +
+                '❓ Tipo de terapia recomendada: _____________\n' +
+                '❓ Duración del tratamiento: _____________\n' +
+                '❓ Costos: _____________\n\n' +
+                'Agradezco su orientación profesional.\n' +
+                'Saludos.'
+            );
+            window.open(`https://wa.me/18296974658?text=${message}`, '_blank');
+        }
+
+        function shareWhatsApp() {
+            const message = encodeURIComponent(generatedContent);
+            window.open(`https://wa.me/?text=${message}`, '_blank');
+        }
+
+        function copyContent() {
+            navigator.clipboard.writeText(generatedContent).then(() => {
+                alert('Contenido copiado al portapapeles');
+            });
+        }
+
+        function downloadImage() {
+            const canvas = document.getElementById('marketingCanvas');
+            const link = document.createElement('a');
+            link.download = `fisioterapia-kenia-${selectedCategory}-${Date.now()}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCategories();
+            setTemplateType('educational');
+            
+            // Add CanvasRenderingContext2D.roundRect polyfill for older browsers
+            if (!CanvasRenderingContext2D.prototype.roundRect) {
+                CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+                    this.beginPath();
+                    this.moveTo(x + r, y);
+                    this.lineTo(x + w - r, y);
+                    this.quadraticCurveTo(x + w, y, x + w, y + r);
+                    this.lineTo(x + w, y + h - r);
+                    this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+                    this.lineTo(x + r, y + h);
+                    this.quadraticCurveTo(x, y + h, x, y + h - r);
+                    this.lineTo(x, y + r);
+                    this.quadraticCurveTo(x, y, x + r, y);
+                    this.closePath();
+                    return this;
+                };
+            }
+        });
+    </script>
+</body>
+</html>
