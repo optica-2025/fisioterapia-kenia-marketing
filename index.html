@@ -7,171 +7,251 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        .gradient-bg {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
             background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
         }
-        .touch-btn {
-            transition: all 0.3s ease;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .header p {
+            opacity: 0.9;
+        }
+        .content {
+            padding: 25px;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #1e40af;
+            text-align: center;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .option-btn {
+            background: white;
+            border: 2px solid #dbeafe;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .option-btn.selected {
+            background: #dbeafe;
+            border-color: #3b82f6;
+            transform: scale(1.02);
+        }
+        .option-btn i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #3b82f6;
+        }
+        .option-btn div {
+            font-weight: bold;
+            color: #1e40af;
+        }
+        .body-parts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .body-part {
+            background: white;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            padding: 12px 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .body-part.selected {
+            background: #dbeafe;
+            border-color: #3b82f6;
+            transform: scale(1.05);
+        }
+        .body-part .emoji {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .body-part .label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .generate-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 18px;
             font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
         }
-        .touch-btn:active {
+        .generate-btn:active {
             transform: scale(0.98);
         }
-        .selected {
-            border: 3px solid #2563eb !important;
-            background: #dbeafe !important;
-        }
-        .anatomy-image {
-            max-width: 100%;
-            border-radius: 12px;
-            margin: 15px 0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .body-part-btn {
-            padding: 16px 12px;
-            font-size: 16px;
-        }
-        .message-type-btn {
+        .result {
+            display: none;
+            margin-top: 25px;
+            background: #f8fafc;
+            border-radius: 15px;
             padding: 20px;
+            border: 2px solid #e2e8f0;
+        }
+        .result-title {
             text-align: center;
-            border-radius: 16px;
-            margin: 10px 0;
-        }
-        .problem-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 10px;
-            border-radius: 12px;
+            font-size: 20px;
             font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 15px;
         }
-        .pulse {
-            animation: pulse 2s infinite;
+        .message-box {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            white-space: pre-line;
+            line-height: 1.6;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
         .action-btn {
-            background: #10b981;
-            color: white;
             padding: 16px;
             border-radius: 12px;
-            text-decoration: none;
-            display: block;
-            text-align: center;
-            margin: 12px 0;
             font-weight: bold;
-            font-size: 18px;
+            text-align: center;
             border: none;
-            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        .emergency-btn {
-            background: #ef4444;
+        .action-btn:active {
+            transform: scale(0.98);
         }
-        .referral-btn {
-            background: #8b5cf6;
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+        .copy-btn {
+            background: #3b82f6;
+            color: white;
+        }
+        .instructions {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #64748b;
+        }
+        .highlight {
+            background: #fffbeb;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border-left: 4px solid #f59e0b;
         }
     </style>
 </head>
-<body class="bg-gray-100">
-    <div class="min-h-screen">
-        <!-- Header simplificado -->
-        <div class="gradient-bg text-white py-6">
-            <div class="max-w-4xl mx-auto px-4 text-center">
-                <h1 class="text-2xl font-bold mb-2">Fisioterapia Kenia</h1>
-                <h2 class="text-xl">Lic. Kenia de los Santos Andujar</h2>
-                <p class="text-base opacity-90 mt-2">Crear mensajes para enviar a clientes</p>
-            </div>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Fisioterapia Kenia</h1>
+            <p>Lic. Kenia de los Santos Andujar</p>
         </div>
-
-        <div class="max-w-4xl mx-auto px-4 py-6">
-            <!-- Opciones Principales simplificadas -->
-            <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                <h2 class="text-xl font-bold mb-4 text-center">¿Qué mensaje quieres crear?</h2>
-              
-                <div class="grid grid-cols-2 gap-3 mb-6">
-                    <button onclick="selectMessageType('info')" id="type-info" class="message-type-btn touch-btn bg-blue-500 text-white selected">
-                        <i class="fas fa-info-circle text-2xl mb-2"></i>
-                        <div class="font-bold">Información</div>
-                    </button>
-                  
-                    <button onclick="selectMessageType('offer')" id="type-offer" class="message-type-btn touch-btn bg-purple-500 text-white">
-                        <i class="fas fa-gift text-2xl mb-2"></i>
-                        <div class="font-bold">Ofertas</div>
-                    </button>
+       
+        <div class="content">
+            <div class="section-title">¿Qué tipo de mensaje quieres crear?</div>
+           
+            <div class="options-grid">
+                <div class="option-btn selected" onclick="selectMessageType('info')">
+                    <i class="fas fa-info-circle"></i>
+                    <div>Información</div>
                 </div>
-
-                <!-- Selector de Parte del Cuerpo -->
-                <div class="mb-6">
-                    <h3 class="text-lg font-bold mb-4">¿Para qué problema?</h3>
-                    <div class="grid grid-cols-4 gap-3">
-                        <button onclick="selectProblem('espalda')" id="prob-espalda" class="problem-btn touch-btn bg-blue-100 border-2 border-blue-400 selected">
-                            <span class="text-2xl mb-1">🔵</span>
-                            <span class="text-sm">Espalda</span>
-                        </button>
-                        <button onclick="selectProblem('cuello')" id="prob-cuello" class="problem-btn touch-btn bg-blue-100 border-2 border-gray-300">
-                            <span class="text-2xl mb-1">🔴</span>
-                            <span class="text-sm">Cuello</span>
-                        </button>
-                        <button onclick="selectProblem('rodilla')" id="prob-rodilla" class="problem-btn touch-btn bg-blue-100 border-2 border-gray-300">
-                            <span class="text-2xl mb-1">🟢</span>
-                            <span class="text-sm">Rodilla</span>
-                        </button>
-                        <button onclick="selectProblem('hombro')" id="prob-hombro" class="problem-btn touch-btn bg-blue-100 border-2 border-gray-300">
-                            <span class="text-2xl mb-1">🟡</span>
-                            <span class="text-sm">Hombro</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <button onclick="generateMessage()" class="touch-btn bg-blue-600 text-white py-4 px-8 rounded-xl font-bold text-lg shadow-lg w-full pulse">
-                        <i class="fas fa-magic mr-2"></i>Crear Mensaje
-                    </button>
+                <div class="option-btn" onclick="selectMessageType('offer')">
+                    <i class="fas fa-gift"></i>
+                    <div>Ofertas</div>
                 </div>
             </div>
-
-            <!-- Mensaje Generado -->
-            <div id="messageResult" class="hidden">
-                <!-- Mensaje de Texto -->
-                <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                    <h3 class="text-xl font-bold mb-4 text-center">📱 Mensaje para enviar a clientes</h3>
-                  
-                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200 mb-4">
-                        <div id="messageContent" class="text-base leading-relaxed whitespace-pre-line"></div>
-                    </div>
-                   
-                    <div class="text-center text-sm text-gray-600 mb-4">
-                        <p>👇 Tus clientes verán estos botones en WhatsApp:</p>
-                    </div>
-                  
-                    <!-- Botones de Acción (solo visualización) -->
-                    <div class="space-y-3 mb-6">
-                        <div class="action-btn emergency-btn">
-                            🚨 Tengo dolor urgente
-                        </div>
-                        <div class="action-btn">
-                            📅 Quiero una cita
-                        </div>
-                        <div class="action-btn referral-btn">
-                            👥 Recomendar a un familiar
-                        </div>
-                    </div>
-                  
-                    <!-- Acciones para Kenia -->
-                    <div class="grid gap-3">
-                        <button onclick="sendToWhatsApp()" class="touch-btn bg-green-600 text-white py-4 px-6 rounded-xl font-bold text-lg">
-                            <i class="fab fa-whatsapp mr-2"></i>Enviar por WhatsApp
-                        </button>
-                        <button onclick="copyMessage()" class="touch-btn bg-blue-600 text-white py-4 px-6 rounded-xl font-bold text-lg">
-                            <i class="fas fa-copy mr-2"></i>Copiar Mensaje
-                        </button>
-                    </div>
+           
+            <div class="section-title">¿Para qué parte del cuerpo?</div>
+           
+            <div class="body-parts">
+                <div class="body-part selected" onclick="selectProblem('espalda')">
+                    <div class="emoji">🔵</div>
+                    <div class="label">Espalda</div>
+                </div>
+                <div class="body-part" onclick="selectProblem('cuello')">
+                    <div class="emoji">🔴</div>
+                    <div class="label">Cuello</div>
+                </div>
+                <div class="body-part" onclick="selectProblem('rodilla')">
+                    <div class="emoji">🟢</div>
+                    <div class="label">Rodilla</div>
+                </div>
+                <div class="body-part" onclick="selectProblem('hombro')">
+                    <div class="emoji">🟡</div>
+                    <div class="label">Hombro</div>
+                </div>
+            </div>
+           
+            <button class="generate-btn" onclick="generateMessage()">
+                <i class="fas fa-magic"></i> Crear Mensaje para WhatsApp
+            </button>
+           
+            <div class="result" id="result">
+                <div class="result-title">Mensaje creado</div>
+               
+                <div class="message-box" id="messageContent"></div>
+               
+                <div class="highlight">
+                    <strong>Instrucciones:</strong> Este mensaje está listo para enviar por WhatsApp. Tus clientes podrán responder fácilmente.
+                </div>
+               
+                <div class="action-buttons">
+                    <button class="action-btn whatsapp-btn" onclick="sendToWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Abrir WhatsApp
+                    </button>
+                    <button class="action-btn copy-btn" onclick="copyMessage()">
+                        <i class="fas fa-copy"></i> Copiar Mensaje
+                    </button>
+                </div>
+               
+                <div class="instructions">
+                    👉 Después de enviar el mensaje, tus clientes podrán responder directamente en WhatsApp
                 </div>
             </div>
         </div>
@@ -242,7 +322,7 @@
             }
         };
 
-        // Plantillas de mensajes simples
+        // Plantillas de mensajes
         const messageTemplates = {
             info: [
                 `Hola, soy la Lic. Kenia, fisioterapeuta profesional. ¿Sufres de {{problem}}? 😟
@@ -254,12 +334,13 @@ Puedo ayudarte con:
 • Servicio a domicilio 🏠
 • Atención personalizada 👩‍⚕️
 
-📞 Llámame o escribe por WhatsApp: +1 (829) 697-4658 👇
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-👉 *Toca aquí para contactarme* 👈
-[ https://wa.me/18296974658 ] 🤳`,
+📞 *WhatsApp:* +1 (829) 697-4658
+*(Toca este número para hablar directamente conmigo)* 👇
+https://wa.me/18296974658
 
-                `¿Tienes {{problem}}? 😥 No dejes que el dolor te limite.
+¡No dejes que el dolor te limite! 💪`,
+
+                `¿Tienes {{problem}}? 😥
 
 {{consequences}}
 
@@ -268,10 +349,11 @@ Te ofrezco:
 • Evaluación completa 🔍
 • Horarios flexibles ⏰
 
-💬 Escríbeme por WhatsApp: +1 (829) 697-4658 👇
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-👉 *Toca este número para llamarme* 👈
-[ https://wa.me/18296974658 ] 📱`
+💬 *WhatsApp:* +1 (829) 697-4658
+*(Haz clic en este enlace para contactarme)* 👇
+https://wa.me/18296974658
+
+¡Recupera tu bienestar! 🌈`
             ],
             offer: [
                 `🎉 *OFERTA ESPECIAL* 🎉
@@ -285,10 +367,9 @@ Te ofrezco:
 
 📅 Oferta válida hasta el viernes. ¡No esperes más!
 
-💬 Escríbeme por WhatsApp: +1 (829) 697-4658 👇
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-👉 *Toca aquí para agendar tu cita* 👈
-[ https://wa.me/18296974658 ] 🗓️`,
+💬 *WhatsApp:* +1 (829) 697-4658
+*(Toca aquí para agendar tu cita)* 👇
+https://wa.me/18296974658?text=📅%20Quiero%20agendar%20una%20cita`,
 
                 `🔥 *PROMOCIÓN LIMITADA* 🔥
 
@@ -301,10 +382,9 @@ Para pacientes con {{problem}}:
 
 ⏰ Oferta válida por tiempo limitado. ¡Aprovecha ahora!
 
-📞 Llámame o escribe por WhatsApp: +1 (829) 697-4658 👇
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-👉 *Toca este número para contactarme* 👈
-[ https://wa.me/18296974658 ] 🤳`
+📞 *WhatsApp:* +1 (829) 697-4658
+*(Toca este número para contactarme)* 👇
+https://wa.me/18296974658?text=💬%20Hola%20Kenia,%20me%20interesa%20tu%20promoción`
             ]
         };
 
@@ -312,27 +392,24 @@ Para pacientes con {{problem}}:
             messageType = type;
            
             // Remover selección de todos los botones
-            document.querySelectorAll('.message-type-btn').forEach(btn => {
+            document.querySelectorAll('.option-btn').forEach(btn => {
                 btn.classList.remove('selected');
             });
            
             // Aplicar selección al botón clickeado
-            document.getElementById(`type-${type}`).classList.add('selected');
+            event.currentTarget.classList.add('selected');
         }
 
         function selectProblem(problem) {
             selectedProblem = problem;
            
             // Remover selección de todos los botones
-            document.querySelectorAll('.problem-btn').forEach(btn => {
-                btn.classList.remove('selected', 'border-blue-400');
-                btn.classList.add('border-gray-300');
+            document.querySelectorAll('.body-part').forEach(btn => {
+                btn.classList.remove('selected');
             });
            
             // Aplicar selección al botón clickeado
-            const selectedBtn = document.getElementById(`prob-${problem}`);
-            selectedBtn.classList.add('selected', 'border-blue-400');
-            selectedBtn.classList.remove('border-gray-300');
+            event.currentTarget.classList.add('selected');
         }
 
         function generateMessage() {
@@ -354,10 +431,10 @@ Para pacientes con {{problem}}:
             document.getElementById('messageContent').textContent = currentMessage;
            
             // Mostrar resultados
-            document.getElementById('messageResult').classList.remove('hidden');
+            document.getElementById('result').style.display = 'block';
            
             // Scroll a resultados
-            document.getElementById('messageResult').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
         }
 
         function copyMessage() {
@@ -378,13 +455,6 @@ Para pacientes con {{problem}}:
                 window.open(whatsappUrl, '_blank');
             }
         }
-
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', function() {
-            // Configuración inicial
-            selectMessageType('info');
-            selectProblem('espalda');
-        });
     </script>
 </body>
 </html> 
