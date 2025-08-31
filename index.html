@@ -33,21 +33,6 @@
             padding: 16px 12px;
             font-size: 16px;
         }
-        .contact-btn {
-            background: #10b981;
-            color: white;
-            padding: 16px;
-            border-radius: 12px;
-            text-decoration: none;
-            display: block;
-            text-align: center;
-            margin: 12px 0;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .emergency-btn {
-            background: #ef4444;
-        }
         .message-type-btn {
             padding: 20px;
             text-align: center;
@@ -71,6 +56,26 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+        .action-btn {
+            background: #10b981;
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin: 12px 0;
+            font-weight: bold;
+            font-size: 18px;
+            border: none;
+            width: 100%;
+        }
+        .emergency-btn {
+            background: #ef4444;
+        }
+        .referral-btn {
+            background: #8b5cf6;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -80,14 +85,14 @@
             <div class="max-w-4xl mx-auto px-4 text-center">
                 <h1 class="text-2xl font-bold mb-2">Fisioterapia Kenia</h1>
                 <h2 class="text-xl">Lic. Kenia de los Santos Andujar</h2>
-                <p class="text-base opacity-90 mt-2">Crear mensajes para mis clientes</p>
+                <p class="text-base opacity-90 mt-2">Crear mensajes para enviar a clientes</p>
             </div>
         </div>
 
         <div class="max-w-4xl mx-auto px-4 py-6">
             <!-- Opciones Principales simplificadas -->
             <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                <h2 class="text-xl font-bold mb-4 text-center">¿Qué quieres enviar?</h2>
+                <h2 class="text-xl font-bold mb-4 text-center">¿Qué mensaje quieres crear?</h2>
               
                 <div class="grid grid-cols-2 gap-3 mb-6">
                     <button onclick="selectMessageType('info')" id="type-info" class="message-type-btn touch-btn bg-blue-500 text-white selected">
@@ -99,21 +104,11 @@
                         <i class="fas fa-gift text-2xl mb-2"></i>
                         <div class="font-bold">Ofertas</div>
                     </button>
-
-                    <button onclick="selectMessageType('card')" id="type-card" class="message-type-btn touch-btn bg-green-600 text-white">
-                        <i class="fas fa-id-card text-2xl mb-2"></i>
-                        <div class="font-bold">Tarjeta</div>
-                    </button>
-
-                    <button onclick="selectMessageType('testimonial')" id="type-testimonial" class="message-type-btn touch-btn bg-yellow-500 text-white">
-                        <i class="fas fa-star text-2xl mb-2"></i>
-                        <div class="font-bold">Testimonios</div>
-                    </button>
                 </div>
 
                 <!-- Selector de Parte del Cuerpo -->
                 <div class="mb-6">
-                    <h3 class="text-lg font-bold mb-4">¿Qué parte del cuerpo duele?</h3>
+                    <h3 class="text-lg font-bold mb-4">¿Para qué problema?</h3>
                     <div class="grid grid-cols-4 gap-3">
                         <button onclick="selectProblem('espalda')" id="prob-espalda" class="problem-btn touch-btn bg-blue-100 border-2 border-blue-400 selected">
                             <span class="text-2xl mb-1">🔵</span>
@@ -141,38 +136,35 @@
                 </div>
             </div>
 
-            <!-- Mensaje y Plantilla Generados -->
+            <!-- Mensaje Generado -->
             <div id="messageResult" class="hidden">
-                <!-- Imagen de anatomía -->
-                <div class="bg-white rounded-xl shadow-lg p-6 mb-6 text-center">
-                    <h3 class="text-xl font-bold mb-4">📍 ¿Dónde te duele?</h3>
-                    <img id="anatomyImage" class="anatomy-image mx-auto" src="https://images.unsplash.com/photo-1583454110551-21f2fa2ef61b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Anatomía humana">
-                    <p class="text-sm text-gray-600 mt-2">Puedes marcar en la imagen donde sientes dolor</p>
-                </div>
-
                 <!-- Mensaje de Texto -->
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                    <h3 class="text-xl font-bold mb-4 text-center">📱 Mensaje para enviar</h3>
+                    <h3 class="text-xl font-bold mb-4 text-center">📱 Mensaje para enviar a clientes</h3>
                   
-                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200 mb-4">
                         <div id="messageContent" class="text-base leading-relaxed whitespace-pre-line"></div>
                     </div>
-                  
-                    <!-- Botones de Acción -->
-                    <div class="mt-6 space-y-3">
-                        <button onclick="sendAction('emergency')" class="touch-btn emergency-btn contact-btn">
-                            🚨 Tengo dolor urgente
-                        </button>
-                        <button onclick="sendAction('appointment')" class="touch-btn contact-btn" style="background: #3b82f6;">
-                            📅 Quiero una cita
-                        </button>
-                        <button onclick="sendAction('refer')" class="touch-btn contact-btn" style="background: #8b5cf6;">
-                            👥 Recomendar a familiar
-                        </button>
+                   
+                    <div class="text-center text-sm text-gray-600 mb-4">
+                        <p>👇 Tus clientes verán estos botones en WhatsApp:</p>
                     </div>
                   
-                    <!-- Acciones -->
-                    <div class="grid gap-3 mt-6">
+                    <!-- Botones de Acción (solo visualización) -->
+                    <div class="space-y-3 mb-6">
+                        <div class="action-btn emergency-btn">
+                            🚨 Tengo dolor urgente
+                        </div>
+                        <div class="action-btn">
+                            📅 Quiero una cita
+                        </div>
+                        <div class="action-btn referral-btn">
+                            👥 Recomendar a un familiar
+                        </div>
+                    </div>
+                  
+                    <!-- Acciones para Kenia -->
+                    <div class="grid gap-3">
                         <button onclick="sendToWhatsApp()" class="touch-btn bg-green-600 text-white py-4 px-6 rounded-xl font-bold text-lg">
                             <i class="fab fa-whatsapp mr-2"></i>Enviar por WhatsApp
                         </button>
@@ -190,54 +182,62 @@
         let selectedProblem = 'espalda';
         let currentMessage = '';
 
-        // Imágenes reales de anatomía humana
-        const anatomyImages = {
-            espalda: 'https://images.unsplash.com/photo-1583454110551-21f2fa2ef61b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-            cuello: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-            rodilla: 'https://images.unsplash.com/photo-1504439468489-c8920d796a29?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-            hombro: 'https://images.unsplash.com/photo-1519817914152-22d216bb9170?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-            pies: 'https://images.unsplash.com/photo-1543946200-2c3f2aba2e5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-            geriatrica: 'https://images.unsplash.com/photo-1535448580089-c7f9490c78b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-            deportiva: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-            general: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-        };
-
         // Base de datos de contenido
         const contentDatabase = {
             espalda: {
                 name: 'dolor de espalda',
                 problems: [
-                    'dolor lumbar', 'contracturas', 'lumbago', 'ciática'
+                    'dolor lumbar 🔵', 'contracturas musculares 🔴', 'lumbago ⚡', 'ciática 💢'
                 ],
                 treatments: [
-                    'masajes terapéuticos', 'ejercicios especializados', 'terapia manual'
+                    'masajes terapéuticos 💆‍♀️', 'ejercicios especializados 🏋️‍♀️', 'terapia manual ✋'
+                ],
+                consequences: [
+                    'Puede limitar tu movilidad 🚶‍♂️',
+                    'Dificulta actividades diarias 🏠',
+                    'Puede empeorar sin tratamiento 📈'
                 ]
             },
             cuello: {
                 name: 'dolor de cuello',
                 problems: [
-                    'tortícolis', 'rigidez cervical', 'dolor de cabeza tensional'
+                    'tortícolis 🔴', 'rigidez cervical 🔵', 'dolor de cabeza tensional 💢'
                 ],
                 treatments: [
-                    'terapia manual', 'ejercicios de estiramiento', 'liberación de puntos tensos'
+                    'terapia manual ✋', 'ejercicios de estiramiento 🧘‍♀️', 'liberación de puntos tensos 💆‍♀️'
+                ],
+                consequences: [
+                    'Puede causar dolores de cabeza 🤕',
+                    'Limita el movimiento del cuello 🙆‍♂️',
+                    'Afecta la postura corporal 🧍'
                 ]
             },
             rodilla: {
                 name: 'dolor de rodilla',
                 problems: [
-                    'artritis', 'rodilla hinchada', 'dolor al caminar'
+                    'artritis 🔴', 'rodilla hinchada 🔵', 'dolor al caminar 🚶‍♂️'
                 ],
                 treatments: [
-                    'fortalecimiento', 'ejercicios de rehabilitación', 'terapia de compresión'
+                    'fortalecimiento muscular 💪', 'ejercicios de rehabilitación 🏋️‍♀️', 'terapia de compresión 🩹'
+                ],
+                consequences: [
+                    'Dificulta caminar 🚶‍♂️',
+                    'Puede llevar a desgaste articular 📉',
+                    'Afecta la movilidad general 🏃‍♂️'
                 ]
             },
             hombro: {
                 name: 'dolor de hombro',
                 problems: [
-                    'hombro congelado', 'dificultad para mover el brazo', 'dolor nocturno'
+                    'hombro congelado ❄️', 'dificultad para mover el brazo 🦾', 'dolor nocturno 🌙'
                 ],
                 treatments: [
-                    'movilizaciones', 'ejercicios de amplitud de movimiento', 'terapia manual'
+                    'movilizaciones articulares 🔄', 'ejercicios de amplitud de movimiento 🏋️‍♀️', 'terapia manual ✋'
+                ],
+                consequences: [
+                    'Limita el movimiento del brazo 🦾',
+                    'Dificulta actividades cotidianas 🏠',
+                    'Puede empeorar sin tratamiento 📈'
                 ]
             }
         };
@@ -245,24 +245,66 @@
         // Plantillas de mensajes simples
         const messageTemplates = {
             info: [
-                'Hola, soy la Lic. Kenia, fisioterapeuta. ¿Tienes {{problem}}? Puedo ayudarte con {{treatments}}. Servicio a domicilio. WhatsApp: +1 (829) 697-4658',
-              
-                '¿Sufres de {{problem}}? Como fisioterapeuta profesional, te ofrezco {{treatments}}. Atención personalizada. Llámame: +1 (829) 697-4658',
+                `Hola, soy la Lic. Kenia, fisioterapeuta profesional. ¿Sufres de {{problem}}? 😟
+
+{{consequences}}
+
+Puedo ayudarte con:
+• {{treatments}} ✨
+• Servicio a domicilio 🏠
+• Atención personalizada 👩‍⚕️
+
+📞 Llámame o escribe por WhatsApp: +1 (829) 697-4658 👇
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+👉 *Toca aquí para contactarme* 👈
+[ https://wa.me/18296974658 ] 🤳`,
+
+                `¿Tienes {{problem}}? 😥 No dejes que el dolor te limite.
+
+{{consequences}}
+
+Te ofrezco:
+• {{treatments}} 🌟
+• Evaluación completa 🔍
+• Horarios flexibles ⏰
+
+💬 Escríbeme por WhatsApp: +1 (829) 697-4658 👇
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+👉 *Toca este número para llamarme* 👈
+[ https://wa.me/18296974658 ] 📱`
             ],
             offer: [
-                'OFERTA ESPECIAL: Esta semana, consulta inicial con 30% descuento para {{problem}}. Incluye evaluación completa. WhatsApp: +1 (829) 697-4658',
-              
-                'PROMOCIÓN: Paquete de 3 sesiones para {{problem}} a precio especial. Incluye servicio a domicilio. WhatsApp: +1 (829) 697-4658',
-            ],
-            card: [
-                'Lic. Kenia de los Santos - Fisioterapeuta profesional. Especialista en rehabilitación. Servicio a domicilio. WhatsApp: +1 (829) 697-4658',
-              
-                '¿Necesitas ayuda con dolores musculares? Soy la Lic. Kenia, fisioterapeuta. Atención personalizada. WhatsApp: +1 (829) 697-4658',
-            ],
-            testimonial: [
-                '"La Lic. Kenia me ayudó con mi {{problem}}. En pocas sesiones mejoré mucho. ¡100% recomendada!" - Paciente satisfecho. WhatsApp: +1 (829) 697-4658',
-              
-                '"Gracias a la Lic. Kenia por su tratamiento para mi {{problem}}. Profesional y efectiva." - Testimonio real. WhatsApp: +1 (829) 697-4658',
+                `🎉 *OFERTA ESPECIAL* 🎉
+
+¿Sufres de {{problem}}? Esta semana tengo una promoción para ti:
+
+💰 *Consulta inicial con 30% descuento*
+✅ Incluye evaluación completa
+✅ Servicio a domicilio incluido
+✅ Plan de tratamiento personalizado
+
+📅 Oferta válida hasta el viernes. ¡No esperes más!
+
+💬 Escríbeme por WhatsApp: +1 (829) 697-4658 👇
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+👉 *Toca aquí para agendar tu cita* 👈
+[ https://wa.me/18296974658 ] 🗓️`,
+
+                `🔥 *PROMOCIÓN LIMITADA* 🔥
+
+Para pacientes con {{problem}}:
+
+💸 *Paquete de 3 sesiones a precio especial*
+✅ Valoración inicial gratuita
+✅ Servicio a domicilio
+✅ Ejercicios personalizados
+
+⏰ Oferta válida por tiempo limitado. ¡Aprovecha ahora!
+
+📞 Llámame o escribe por WhatsApp: +1 (829) 697-4658 👇
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+👉 *Toca este número para contactarme* 👈
+[ https://wa.me/18296974658 ] 🤳`
             ]
         };
 
@@ -297,20 +339,19 @@
             const problemData = contentDatabase[selectedProblem];
             const template = messageTemplates[messageType][Math.floor(Math.random() * messageTemplates[messageType].length)];
            
-            // Seleccionar problemas y tratamientos aleatorios
+            // Seleccionar problemas, tratamientos y consecuencias aleatorios
             const randomProblem = problemData.problems[Math.floor(Math.random() * problemData.problems.length)];
             const randomTreatment = problemData.treatments[Math.floor(Math.random() * problemData.treatments.length)];
+            const randomConsequence = problemData.consequences[Math.floor(Math.random() * problemData.consequences.length)];
            
             // Reemplazar placeholders
             currentMessage = template
                 .replace(/{{problem}}/g, randomProblem)
-                .replace(/{{treatments}}/g, randomTreatment);
+                .replace(/{{treatments}}/g, randomTreatment)
+                .replace(/{{consequences}}/g, randomConsequence);
            
             // Mostrar mensaje
             document.getElementById('messageContent').textContent = currentMessage;
-           
-            // Mostrar imagen de anatomía
-            document.getElementById('anatomyImage').src = anatomyImages[selectedProblem];
            
             // Mostrar resultados
             document.getElementById('messageResult').classList.remove('hidden');
@@ -333,28 +374,9 @@
 
         function sendToWhatsApp() {
             if (currentMessage) {
-                const whatsappUrl = `https://wa.me/18296974658?text=${encodeURIComponent(currentMessage)}`;
+                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(currentMessage)}`;
                 window.open(whatsappUrl, '_blank');
             }
-        }
-
-        function sendAction(actionType) {
-            let actionMessage = '';
-           
-            switch(actionType) {
-                case 'emergency':
-                    actionMessage = '🚨 Hola Kenia, tengo un dolor urgente y necesito ayuda inmediata.';
-                    break;
-                case 'appointment':
-                    actionMessage = '📅 Hola Kenia, me gustaría agendar una cita para una evaluación.';
-                    break;
-                case 'refer':
-                    actionMessage = '👥 Hola Kenia, quiero recomendar a un familiar o amigo que necesita tus servicios.';
-                    break;
-            }
-           
-            const whatsappUrl = `https://wa.me/18296974658?text=${encodeURIComponent(actionMessage)}`;
-            window.open(whatsappUrl, '_blank');
         }
 
         // Inicializar
